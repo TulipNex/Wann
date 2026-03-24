@@ -69,7 +69,7 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
             let pushCmd = action === 'forcepush' ? 'git push -u origin main --force' : 'git push -u origin main';
             
             // Rantai eksekusi Git (Ditambah proteksi bypass commit jika tidak ada perubahan baru)
-            let gitCommand = `git config user.email "bot@developer.com" && git config user.name "Bot Developer" && git add . && (git commit -m "${safeCommitMsg}" || echo "Tidak ada perubahan baru untuk di-commit") && git branch -M main && ${pushCmd}`;
+            let gitCommand = `git config user.email "bot@developer.com" && git config user.name "Mitraaa" && git add . && (git commit -m "${safeCommitMsg}" || echo "Tidak ada perubahan baru untuk di-commit") && git branch -M main && ${pushCmd}`;
             
             const { stdout, stderr } = await execPromise(gitCommand);
             
