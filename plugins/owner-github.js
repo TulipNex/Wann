@@ -19,6 +19,7 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
         caption += `2. *${usedPrefix + command} init*\n> Inisialisasi git di dalam folder SC bot.\n`;
         caption += `3. *${usedPrefix + command} remote <link_repo>*\n> Set remote URL GitHub. Gunakan Personal Access Token (PAT).\n`;
         caption += `4. *${usedPrefix + command} push <pesan_commit>*\n> Upload semua file ke GitHub dengan pesan commit.\n`;
+        caption += `5. *${usedPrefix + command} forcepush <pesan_commit>*\n> Paksa upload (Timpa remote repo jika ada konflik).\n`;
         return m.reply(caption);
     }
 
@@ -48,9 +49,9 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
             m.reply(`✅ *Remote Origin berhasil diatur!*`);
         } 
         
-        else if (action === 'push') {
+        else if (action === 'push' || action === 'forcepush') {
             let commitMsg = args.slice(1).join(' ');
-            if (!commitMsg) return m.reply(`⚠️ Masukkan pesan commit!\nContoh: *${usedPrefix + command} push update fitur baru*`);
+            if (!commitMsg) return m.reply(`⚠️ Masukkan pesan commit!\nContoh: *${usedPrefix + command} ${action} update fitur baru*`);
 
             let gitignorePath = path.join(process.cwd(), '.gitignore');
             if (!fs.existsSync(gitignorePath)) {
@@ -59,12 +60,15 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
                 conn.reply(m.chat, '🛡️ *Sistem Keamanan:* File `.gitignore` otomatis dibuat untuk mencegah kebocoran data.', m);
             }
 
-            m.reply(global.wait || '⏳ Memulai proses upload ke GitHub. Harap tunggu...');
+            m.reply(global.wait || `⏳ Memulai proses upload (${action}). Harap tunggu...`);
             
             let safeCommitMsg = commitMsg.replace(/(["'$`\\])/g, '\\$1');
             
-            // FIX: Menambahkan konfigurasi nama & email otomatis sebelum melakukan aksi add dan commit
-            let gitCommand = `git config user.email "bot@developer.com" && git config user.name "Bot Developer" && git add . && git commit -m "${safeCommitMsg}" && git branch -M main && git push -u origin main`;
+            // Cek apakah mode force push
+            let pushCmd = action === 'forcepush' ? 'git push -u origin main --force' : 'git push -u origin main';
+            
+            // Rantai eksekusi Git (Ditambah proteksi bypass commit jika tidak ada perubahan baru)
+            let gitCommand = `git config user.email "bot@developer.com" && git config user.name "Bot Developer" && git add . && (git commit -m "${safeCommitMsg}" || echo "Tidak ada perubahan baru untuk di-commit") && git branch -M main && ${pushCmd}`;
             
             const { stdout, stderr } = await execPromise(gitCommand);
             
@@ -85,7 +89,7 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
         if (errStr.includes('fatal: not a git repository')) {
             m.reply('❌ *ERROR:* Folder ini belum menjadi Git Repository. Silakan jalankan *' + usedPrefix + command + ' init* terlebih dahulu.');
         } else if (errStr.includes('Authentication failed') || errStr.includes('403')) {
-            m.reply('❌ *ERROR AUTH:* Token/Password salah atau kadaluarsa. Pastikan Anda menggunakan GitHub Personal Access Token (PAT) yang memiliki akses repo.\n\nAtur ulang dengan: *' + usedPrefix + command + ' remote <link_token>*');
+            m.reply('❌ *ERROR AUTH:* Token/Password salah atau kadaluarsa. Pastikan Anda menggunakan GitHub Personal Access Token (PAT).\n\nAtur ulang dengan: *' + usedPrefix + command + ' remote <link_token>*');
         } else {
             m.reply(`❌ *TERJADI KESALAHAN PADA SISTEM GIT:*\n\n${errStr.substring(0, 1500)}`);
         }
