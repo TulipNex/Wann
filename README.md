@@ -10,7 +10,7 @@
 Hubungi admin melalui WhatsApp untuk informasi lebih lanjut atau bantuan cepat.
 
 <p align="center">
-  <a href="https://wa.me/6282221792667">
+  <a href="https://wa.me/6282215415550">
     <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
   </a>
 </p>
@@ -22,7 +22,7 @@ node index.js
 
 - **Fitur Bot 97%** implementasi dari Rest API, jadi **wajib daftar terlebih dahulu** agar bot bekerja dengan baik.  
 
-📢 **Informasi API & Update Script:** [WhatsApp Channel](https://whatsapp.com/channel/0029VbAI9JCBKfi5qXq9yJ01)  
+📢 **Informasi API & Update Script:** [WhatsApp Channel](https://www.whatsapp.com/channel/0029VbCFzkZCcW4uazD1fB0S)  
 
 ----  
 
@@ -51,18 +51,6 @@ node index.js
 - Setelah mendapatkan apikey, paste di **config.js** pada bagian **`global.btc`**.  
 
 > **Catatan:** Pastikan fitur yang digunakan juga disesuaikan.  
-
----  
-
-## **Support Me On Sociabuzz**  
-
-<a href="https://qris.zone.id/qviqy41iq" target="_blank"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" height="32px" alt="Donate"></a>  
-
----  
-
-### **Deploy ke Render**  
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/blueprint/new?repo=https%3A%2F%2Fgithub.com%2FBOTCAHX%2FRTXZY-MD)  
 
 ---  
 
@@ -154,23 +142,3 @@ Open the package.json file and fill in your mongodb url in the `mongodb: --db mo
 * **Only Owner & Bot** 
 
 ---------
-
-
-## **All Contributors**  
-<a href="https://github.com/BOTCAHX"><img src="https://github.com/BOTCAHX.png?size=100" width="100" height="100"></a> | [![Erlan](https://github.com/ERLANRAHMAT.png?size=100)](https://github.com/ERLANRAHMAT)  
----|---  
-[Tio](https://github.com/BOTCAHX)  | [Erlan](https://github.com/ERLANRAHMAT)  
-Recode | Contributor  
-
----  
-
-## **Special Thanks To**  
-<a href="https://github.com/BochilGaming"><img src="https://github.com/BochilGaming.png?size=100" width="100" height="100"></a> | [![NURUTOMO](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo)  
----|---  
-[Bochilgaming](https://github.com/BochilGaming)  | [Nurutomo](https://github.com/Nurutomo)  
-Sepuh | Sepuh  
-
----  
-
-## **Stargazers Over Time**  
-[![Stargazers over time](https://starchart.cc/BOTCAHX/RTXZY-MD.svg?background=%23FFFFFF&axis=%23333333&line=%23e76060)](https://starchart.cc/BOTCAHX/RTXZY-MD)  
