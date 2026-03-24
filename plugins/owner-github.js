@@ -20,6 +20,7 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
         caption += `3. *${usedPrefix + command} remote <link_repo>*\n> Set remote URL GitHub. Gunakan Personal Access Token (PAT).\n`;
         caption += `4. *${usedPrefix + command} push <pesan_commit>*\n> Upload semua file ke GitHub dengan pesan commit.\n`;
         caption += `5. *${usedPrefix + command} forcepush <pesan_commit>*\n> Paksa upload (Timpa remote repo jika ada konflik).\n`;
+        caption += `6. *${usedPrefix + command} rm <file/folder>*\n> Menghapus file atau folder dari GitHub dan lokal.\n`;
         return m.reply(caption);
     }
 
@@ -79,6 +80,27 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
             
             m.reply(resultMsg);
         } 
+        
+        else if (action === 'rm' || action === 'remove' || action === 'delete') {
+            let targetPath = args.slice(1).join(' ');
+            if (!targetPath) return m.reply(`⚠️ Masukkan nama file atau folder yang ingin dihapus!\nContoh: *${usedPrefix + command} rm folder_sampah* atau *${usedPrefix + command} rm file_rahasia.json*`);
+
+            m.reply(global.wait || `⏳ Sedang menghapus *${targetPath}* dari repository...`);
+            
+            let safePath = targetPath.replace(/(["'$`\\])/g, '\\$1');
+            
+            // Perintah git rm untuk menghapus file/folder, lalu commit, dan push
+            let gitCommand = `git config user.email "bot@developer.com" && git config user.name "Bot Developer" && git rm -r "${safePath}" && git commit -m "Menghapus ${safePath}" && git push -u origin main`;
+            
+            const { stdout, stderr } = await execPromise(gitCommand);
+            
+            let resultMsg = `🗑️ *PENGHAPUSAN BERHASIL!*\n\n*Log:*\n${stdout}`;
+            if (stderr) {
+                resultMsg += `\n*Info/Peringatan:*\n${stderr}`;
+            }
+            
+            m.reply(resultMsg);
+        }
         
         else {
             m.reply(`⚠️ Perintah tidak dikenali. Ketik *${usedPrefix + command}* untuk melihat menu.`);
