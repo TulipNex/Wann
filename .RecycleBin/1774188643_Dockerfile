@@ -1,0 +1,24 @@
+# File: Dockerfile (Format: Dockerfile / Tanpa Ekstensi)
+# Gunakan image Node.js Alpine yang ringan
+FROM node:18-alpine
+
+# Install FFmpeg untuk keperluan konversi media (misal: sticker)
+RUN apk add --no-cache ffmpeg
+
+# Buat direktori aplikasi
+WORKDIR /app
+
+# Copy package.json dan package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy seluruh source code
+COPY . .
+
+# Buat folder auth agar tidak error jika belum ada
+RUN mkdir -p auth_info_baileys
+
+# Command untuk menjalankan aplikasi
+CMD ["npm", "start"]
