@@ -74,9 +74,9 @@ let handler = async (m, { conn, participants }) => {
         let medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '💼';
         
         text += `${medal} *${trader.name}*\n`;
-        text += `   🏛️ Net Worth: Rp ${trader.netWorth.toLocaleString()}\n`;
-        text += `   💵 Cash: Rp ${trader.money.toLocaleString()}\n`;
-        text += `   📦 Asset: Rp ${trader.portfolio.toLocaleString()}\n`;
+        text += `🏛️ Net Worth: \n> Rp ${trader.netWorth.toLocaleString()}\n`;
+        text += `💵 Cash: \n> Rp ${trader.money.toLocaleString()}\n`;
+        text += `📦 Asset: \n> Rp ${trader.portfolio.toLocaleString()}\n`;
         
         // Kasih tanda jika ini adalah user yang mengetik perintah
         if (trader.jid === m.sender) {
