@@ -5,3 +5,4 @@ sessions/
 .npm/
 *.zip
 package-lock.json
+.wink_gnum
