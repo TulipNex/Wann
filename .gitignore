@@ -1,6 +1,7 @@
 node_modules/
 sessions/
 .env
-tmp/
+.RecycleBin/
+.npm/
 *.zip
 package-lock.json
