@@ -5,6 +5,13 @@ const path = require('path');
 const fs = require('fs');
 
 try {
+    // Memuat font dari folder src/font (berdasarkan root direktori bot)
+    registerFont(path.join(process.cwd(), 'src/font/Montserrat-Black.ttf'), { family: 'Montserrat-Black' });
+} catch (e) {
+    console.error('⚠️ Font Montserrat tidak ditemukan di src/font/Montserrat-Black.ttf. Menggunakan font default.');
+}
+
+try {
     // Menggunakan process.cwd() untuk menunjuk langsung ke direktori root bot Anda
     const fontPath = path.join(process.cwd(), 'src', 'font', 'Montserrat-Bold.ttf');
     if (fs.existsSync(fontPath)) {
@@ -105,8 +112,8 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
     // Nama & Jabatan
     ctx.textAlign = 'center';
     ctx.fillStyle = COLOR_WHITE;
-    ctx.font = 'bold 42px Montserrat';
-    ctx.fillText(registered ? name.toUpperCase() : (await conn.getName(who)).toUpperCase(), 260, 460);
+    ctx.font = 'bold 42px Montserrat-Black';
+    ctx.fillText(registered ? name : await conn.getName(who), 260, 460);
 
     ctx.fillStyle = COLOR_SEKUNDER;
     ctx.font = 'bold 22px Montserrat';
