@@ -12,7 +12,7 @@ const GITHUB_TOKEN = "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";
 const REPO_OWNER = "TulipNex";
 const REPO_NAME = "Dashboard";
 const FILE_PATH = "database.json";
-const SYNC_INTERVAL = 1 * 60 * 1000; // 1 Menit
+const SYNC_INTERVAL = 3 * 60 * 1000; // 1 Menit
 // =================================================
 
 async function syncToGithub() {
