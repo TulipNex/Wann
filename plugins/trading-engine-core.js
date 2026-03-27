@@ -216,8 +216,8 @@ if (!global.tradingInterval) {
                     let range = c.max - c.min;
 
                     let upChance = (market.activeEvent.ticker === 'GLOBAL' || market.activeEvent.ticker === t) ? (market.activeEvent.mult > 0 ? 0.8 : 0.2) : 0.5;
-                    let nearMinThreshold = c.min + (range * 0.25);
-                    let nearMaxThreshold = c.max - (range * 0.25);
+                    let nearMinThreshold = c.min + (range * 0.10);
+                    let nearMaxThreshold = c.max - (range * 0.10);
 
                     if (currentPrice <= nearMinThreshold) upChance = Math.max(upChance, 0.95); 
                     else if (currentPrice >= nearMaxThreshold) upChance = Math.min(upChance, 0.05); 

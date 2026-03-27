@@ -65,7 +65,7 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
         caption += `✨ Item: ${marketConfig[targetTicker].name}\n`;
         caption += `💸 Harga: Rp ${curr.toLocaleString('id-ID')}\n`;
         caption += `📊 Perubahan: ${emoji} ${sign}${percent}%\n`;
-        caption += `🏆 ATH: Rp ${ath.toLocaleString('id-ID')}\n`;
+        //caption += `🏆 ATH: Rp ${ath.toLocaleString('id-ID')}\n`;
         caption += `🧾 Pajak Jual Dasar: *${currentTax}%*\n`;
         caption += `──────────────────\n`;
         
