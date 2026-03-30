@@ -1,3 +1,8 @@
+/**
+ * PLUGIN: GROUP SIDER & CLEANER
+ * Fitur: List Sider, Kick Sider, & Reset Sider Data
+ */
+
 let handler = async (m, { conn, text, args, groupMetadata }) => {
 
     const lama = 86400000 * 7 // 7 Hari dalam milidetik
@@ -41,7 +46,9 @@ let handler = async (m, { conn, text, args, groupMetadata }) => {
                         `Grup: *${groupName}*\n` +
                         `Terdapat *${total}/${member.length}* member yang pasif lebih dari 7 hari:\n\n` +
                         `${sider.map(v => '  ○ @' + v.replace(/@.+/, '')).join('\n')}\n\n` +
-                        `_Ketik *.sider kick* untuk menendang mereka._`
+                        `*Opsi Lain:*\n` +
+                        `• *.sider kick* (Keluarkan semua)\n` +
+                        `• *.sider reset* (Update waktu aktif mereka)`
 
         return conn.reply(m.chat, message, m, {
             contextInfo: {
@@ -70,15 +77,31 @@ let handler = async (m, { conn, text, args, groupMetadata }) => {
         return conn.reply(m.chat, `✅ *PEMBERSIHAN SELESAI!*\n\nBerhasil mengeluarkan *${total}* pembaca gelap dari grup ini.`, m)
     }
 
-    // Jika user salah ketik argumen (contoh: .sider hapus)
-    return conn.reply(m.chat, `🚩 Opsi tidak valid. Gunakan *.sider* untuk melihat daftar, atau *.sider kick* untuk mengeluarkan mereka.`, m)
+    // === FITUR 3: SIDER RESET (New Feature) ===
+    if (action === 'reset') {
+        if (total === 0) return conn.reply(m.chat, `🚩 *Data sudah bersih.* Tidak ada sider untuk di-reset.`, m)
+
+        for (const jid of sider) {
+            if (global.db.data.users[jid]) {
+                global.db.data.users[jid].lastseen = milliseconds
+            } else {
+                // Jika belum ada di DB, buatkan profil minimalis agar tidak terdeteksi sider lagi
+                global.db.data.users[jid] = { lastseen: milliseconds }
+            }
+        }
+
+        return conn.reply(m.chat, `✅ *RESET BERHASIL*\n\nWaktu terakhir dilihat untuk *${total} member pasif* telah diperbarui ke saat ini. Mereka tidak akan muncul di daftar sider selama 7 hari ke depan.`, m)
+    }
+
+    // Jika user salah ketik argumen
+    return conn.reply(m.chat, `🚩 Opsi tidak valid.\n\n*Penggunaan:*\n1. *.sider* (Cek list)\n2. *.sider kick* (Tendang)\n3. *.sider reset* (Ampuni/Reset data)`, m)
 }
 
-handler.help = ['sider', 'sider kick']
+handler.help = ['sider', 'sider kick', 'sider reset']
 handler.tags = ['group']
 handler.command = /^(sider|gcsider)$/i
 handler.group = true
 handler.admin = true
-handler.botAdmin = true // Wajib, agar bot bisa kick member
+handler.botAdmin = true 
 
 module.exports = handler

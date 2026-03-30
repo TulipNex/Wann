@@ -42,24 +42,23 @@ const allTags = {
     '': 'NO CATEGORY'
 }
 
+// Desain UI/UX Baru: Minimalis & Elegan
 const defaultMenu = {
     before: `
-Hi %name
+*✦  W A N N  —  S T A B L E  ✦*
 
-Saya adalah Wann (WhatsApp Bot) yang dapat membantu melakukan sesuatu, mencari, dan mendapatkan data/informasi hanya melalui WhatsApp.
+Halo %name 👋,
+Selamat datang di pusat kontrol.
 
-◦ *Library:* Baileys
-◦ *Function:* Assistant
-
-┌  ◦ Uptime : %uptime
-│  ◦ Tanggal : %date
-│  ◦ Waktu : %time WITA
-└  ◦ Prefix Used : *[ %p ]*
+*S T A T U S  S Y S T E M*
+ ⚬ *Waktu* : %time WITA
+ ⚬ *Tanggal* : %date
+ ⚬ *Prefix* : [ %p ]
 `.trimStart(),
-    header: '┌  ◦ *%category*',
-    body: '│  ◦ %cmd %islimit %isPremium',
-    footer: '└  ',
-    after: `*Note:* Ketik .menu <category> untuk melihat menu spesifik\nContoh: .menu tools`
+    header: '\n*✦ %category*',
+    body: '  ⚬ %cmd %islimit %isPremium',
+    footer: '',
+    after: `\n> *Hint:* Ketik *%pmenu <kategori>* untuk membuka menu.\n\n> Contoh: *%pmenu tools*`
 }
 
 let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) => {
@@ -96,13 +95,14 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
         }
 
         if (!teks) {
-            let menuList = `${defaultMenu.before}\n\n┌  ◦ *DAFTAR MENU*\n`
+            // Tampilan Kategori Utama (Clean List)
+            let menuList = `${defaultMenu.before}\n\n*A V A I L A B L E   M E N U S*\n`
             for (let tag of arrayMenu) {
                 if (tag && allTags[tag] && !hiddenCategories.includes(tag)) {
-                    menuList += `│  ◦ ${_p}menu ${tag}\n`
+                    menuList += `  ⚬ ${_p}menu ${tag}\n`
                 }
             }
-            menuList += `└  \n\n${defaultMenu.after}`
+            menuList += `\n${defaultMenu.after}`
 
             let replace = { '%': '%', p: _p, uptime, name, date, time }
             let text = menuList.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
@@ -113,7 +113,7 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
                     contextInfo: {
                         mentionedJid: [m.sender],
                         externalAdReply: {
-                            title: 'Wann',
+                            title: 'Wann Assistant',
                             body: 'Powered by TulipNex',
                             mediaType: 1,
                             previewType: 0,
@@ -131,7 +131,7 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
             return m.reply(`Menu "${teks}" tidak tersedia.\nSilakan ketik ${_p}menu untuk melihat daftar menu.`)
         }
 
-        let menuCategory = defaultMenu.before + '\n\n'
+        let menuCategory = defaultMenu.before + '\n'
         
         if (teks === 'all') {
             for (let tag of arrayMenu) {
@@ -147,14 +147,14 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
                                 name: helpItem,
                                 str: defaultMenu.body
                                     .replace(/%cmd/g, menu.prefix ? helpItem : _p + helpItem)
-                                    .replace(/%islimit/g, menu.limit ? '(Ⓛ)' : '')
-                                    .replace(/%isPremium/g, menu.premium ? '(Ⓟ)' : '')
+                                    .replace(/%islimit/g, menu.limit ? ' Ⓛ' : '')
+                                    .replace(/%isPremium/g, menu.premium ? ' Ⓟ' : '')
                             });
                         }
                     }
                     formattedCommands.sort((a, b) => String(a.name).localeCompare(String(b.name)));
                     menuCategory += formattedCommands.map(c => c.str).join('\n') + '\n';
-                    menuCategory += defaultMenu.footer + '\n'
+                    if (defaultMenu.footer) menuCategory += defaultMenu.footer + '\n';
                 }
             }
         } else {
@@ -169,17 +169,17 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
                         name: helpItem,
                         str: defaultMenu.body
                             .replace(/%cmd/g, menu.prefix ? helpItem : _p + helpItem)
-                            .replace(/%islimit/g, menu.limit ? '(Ⓛ)' : '')
-                            .replace(/%isPremium/g, menu.premium ? '(Ⓟ)' : '')
+                            .replace(/%islimit/g, menu.limit ? ' Ⓛ' : '')
+                            .replace(/%isPremium/g, menu.premium ? ' Ⓟ' : '')
                     });
                 }
             }
             formattedCommands.sort((a, b) => String(a.name).localeCompare(String(b.name)));
             menuCategory += formattedCommands.map(c => c.str).join('\n') + '\n';
-            menuCategory += defaultMenu.footer + '\n'
+            if (defaultMenu.footer) menuCategory += defaultMenu.footer + '\n';
         }
 
-        menuCategory += '\n' + defaultMenu.after
+        menuCategory += defaultMenu.after
         
         let replace = { '%': '%', p: _p, uptime, name, date, time }
         let text = menuCategory.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
@@ -190,7 +190,7 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
                 contextInfo: {
                     mentionedJid: [m.sender],
                     externalAdReply: {
-                        title: 'Wann',
+                        title: 'Wann Assistant',
                         body: 'Powered by TulipNex',
                         mediaType: 1,
                         previewType: 0,
