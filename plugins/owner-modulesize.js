@@ -115,5 +115,6 @@ handler.tags = ['owner'];
 handler.command = /^(modulesize|pkgsize|checksize)$/i;
 
 handler.owner = true; // Hanya dapat diakses oleh owner karena proses ini memakan resource CPU (I/O) singkat
+handler.private = true;
 
 module.exports = handler;

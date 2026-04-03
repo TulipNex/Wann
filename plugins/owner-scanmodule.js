@@ -128,5 +128,6 @@ handler.tags = ['owner'];
 handler.command = /^(scanmodule|pkgmap|checkpackage|listmodule)$/i;
 
 handler.owner = true; // Hanya owner yang boleh menggunakan untuk keamanan data arsitektur bot
+handler.private = true;
 
 module.exports = handler;

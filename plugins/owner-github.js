@@ -121,6 +121,7 @@ let handler = async (m, { conn, text, usedPrefix, command, args }) => {
 handler.help = ['github', 'gh'];
 handler.tags = ['owner'];
 handler.command = /^(github|gh)$/i;
-handler.rowner = true; 
+handler.rowner = true;
+handler.private = true;
 
 module.exports = handler;
