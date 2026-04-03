@@ -417,10 +417,10 @@
       "waifu": "Belum Di Set",
       "husbu": "Belum Di Set",
       "pc": 0,
-      "exp": 1677405,
+      "exp": 1679849,
       "coin": 0,
       "atm": 0,
-      "limit": 76,
+      "limit": 75,
       "skata": -11,
       "tigame": 999,
       "lastclaim": 1775100598210,
@@ -442,7 +442,7 @@
       "kardus": 0,
       "botol": 0,
       "kaleng": 0,
-      "money": 4016599090,
+      "money": 4444325534,
       "litecoin": 0,
       "chip": 0,
       "tiketcoin": 1,
@@ -732,9 +732,9 @@
       "lastdate": 0,
       "lasttambang": 0,
       "lastngepet": 0,
-      "command": 4264,
-      "commandTotal": 4264,
-      "lastCmd": 1775128101549,
+      "command": 4369,
+      "commandTotal": 4369,
+      "lastCmd": 1775207635238,
       "glimit": 10,
       "pertambangan": 0,
       "lastbossbattle": 0,
@@ -781,12 +781,12 @@
       "pengingat": [],
       "ref_code": "3FPg4kF5cMT",
       "ref_count": 0,
-      "ivylink": 3202814,
+      "ivylink": 202814,
       "rosex": 0,
       "staking": {
         "IVL": {
-          "amount": 1000005,
-          "lastHarvest": 1775127529769
+          "amount": 4000005,
+          "lastHarvest": 1775130609384
         },
         "TNX": {
           "amount": 2,
@@ -1226,10 +1226,10 @@
       "waifu": "Belum Di Set",
       "husbu": "Belum Di Set",
       "pc": 0,
-      "exp": 540925,
+      "exp": 541001,
       "coin": 0,
       "atm": 0,
-      "limit": 96,
+      "limit": 93,
       "skata": 0,
       "tigame": 999,
       "lastclaim": 0,
@@ -1541,9 +1541,9 @@
       "lastdate": 0,
       "lasttambang": 0,
       "lastngepet": 0,
-      "command": 612,
-      "commandTotal": 612,
-      "lastCmd": 1775070071619,
+      "command": 615,
+      "commandTotal": 615,
+      "lastCmd": 1775187192121,
       "glimit": 10,
       "pertambangan": 0,
       "lastbossbattle": 0,
@@ -2016,7 +2016,7 @@
       "waifu": "Belum Di Set",
       "husbu": "Belum Di Set",
       "pc": 0,
-      "exp": 873,
+      "exp": 903,
       "coin": 0,
       "atm": 0,
       "limit": 100,
@@ -2365,9 +2365,9 @@
       "bibitapel": 0,
       "bibitmangga": 0,
       "bibitjeruk": 0,
-      "command": 37,
-      "commandTotal": 37,
-      "lastCmd": 1775070415213,
+      "command": 38,
+      "commandTotal": 38,
+      "lastCmd": 1775148255701,
       "token": 10
     },
     "135188390633710@lid": {
@@ -2783,7 +2783,7 @@
       "waifu": "Belum Di Set",
       "husbu": "Belum Di Set",
       "pc": 0,
-      "exp": 111,
+      "exp": 112,
       "coin": 0,
       "atm": 0,
       "limit": 100,
@@ -3550,7 +3550,7 @@
       "waifu": "Belum Di Set",
       "husbu": "Belum Di Set",
       "pc": 0,
-      "exp": 101,
+      "exp": 107,
       "coin": 0,
       "atm": 0,
       "limit": 100,
@@ -4700,7 +4700,7 @@
       "health": 100,
       "energi": 100,
       "power": 100,
-      "title": "",
+      "title": 0,
       "haus": 100,
       "laper": 100,
       "tprem": 0,
@@ -4717,7 +4717,7 @@
       "waifu": "Belum Di Set",
       "husbu": "Belum Di Set",
       "pc": 0,
-      "exp": 7,
+      "exp": 8,
       "coin": 0,
       "atm": 0,
       "limit": 100,
@@ -5032,7 +5032,41 @@
       "lastkoboy": 0,
       "lastdate": 0,
       "lasttambang": 0,
-      "lastngepet": 0
+      "lastngepet": 0,
+      "glimit": 10,
+      "pertambangan": 0,
+      "lastbossbattle": 0,
+      "aqua": 0,
+      "glory": 0,
+      "enchant": 0,
+      "psepick": 0,
+      "psenjata": 0,
+      "lastgemclaim": 0,
+      "makanangriffin": 0,
+      "healthmonster": 0,
+      "anakserigala": 0,
+      "anaknaga": 0,
+      "anakphonix": 0,
+      "anakgriffin": 0,
+      "kyubi": 0,
+      "anakkyubi": 0,
+      "anakcentaur": 0,
+      "kingdom": false,
+      "lastsda": 0,
+      "lastberbru": 0,
+      "lastgift": 0,
+      "jualan": 0,
+      "lastjualan": 0,
+      "ngocokk": 0,
+      "lastngocokk": 0,
+      "lastcodereg": 0,
+      "anggur": 0,
+      "pisang": 0,
+      "bibitanggur": 0,
+      "bibitpisang": 0,
+      "bibitapel": 0,
+      "bibitmangga": 0,
+      "bibitjeruk": 0
     },
     "6283853531950@s.whatsapp.net": {
       "taxi": 0,
@@ -5418,6 +5452,398 @@
       "bibitapel": 0,
       "bibitmangga": 0,
       "bibitjeruk": 0
+    },
+    "6285591068997@s.whatsapp.net": {
+      "taxi": 0,
+      "lasttaxi": 0,
+      "lastyoutuber": 0,
+      "subscribers": 0,
+      "viewers": 0,
+      "like": 0,
+      "playButton": 0,
+      "saldo": 0,
+      "pengeluaran": 0,
+      "healt": 100,
+      "health": 100,
+      "energi": 100,
+      "power": 100,
+      "title": 0,
+      "haus": 100,
+      "laper": 100,
+      "tprem": 0,
+      "stamina": 100,
+      "level": 0,
+      "follow": 0,
+      "lastfollow": 0,
+      "followers": 0,
+      "pasangan": "",
+      "sahabat": "",
+      "location": "Gubuk",
+      "titlein": "Belum Ada",
+      "ultah": "",
+      "waifu": "Belum Di Set",
+      "husbu": "Belum Di Set",
+      "pc": 0,
+      "exp": 207,
+      "coin": 0,
+      "atm": 0,
+      "limit": 100,
+      "token": 5,
+      "skata": 0,
+      "tigame": 999,
+      "lastclaim": 0,
+      "judilast": 0,
+      "lastnambang": 0,
+      "lastnebang": 0,
+      "lastmulung": 0,
+      "lastkerja": 0,
+      "lastmaling": 0,
+      "lastbunuhi": 0,
+      "lastbisnis": 0,
+      "lastberbisnis": 0,
+      "bisnis": 0,
+      "berbisnis": 0,
+      "lastmancing": 0,
+      "pancing": 0,
+      "pancingan": 0,
+      "totalPancingan": 0,
+      "kardus": 0,
+      "botol": 0,
+      "kaleng": 0,
+      "money": 6720,
+      "litecoin": 0,
+      "chip": 0,
+      "tiketcoin": 0,
+      "poin": 0,
+      "bank": 0,
+      "balance": 0,
+      "diamond": 0,
+      "emerald": 0,
+      "rock": 0,
+      "wood": 0,
+      "berlian": 0,
+      "iron": 0,
+      "emas": 0,
+      "common": 0,
+      "uncommon": 0,
+      "mythic": 0,
+      "legendary": 0,
+      "rumahsakit": 0,
+      "tambang": 0,
+      "camptroops": 0,
+      "pertanian": 0,
+      "fortress": 0,
+      "trofi": 0,
+      "rtrofi": "perunggu",
+      "makanan": 0,
+      "troopcamp": 0,
+      "shield": 0,
+      "arlok": 0,
+      "ojekk": 0,
+      "ojek": 0,
+      "lastngewe": 0,
+      "ngewe": 0,
+      "polisi": 0,
+      "pedagang": 0,
+      "dokter": 0,
+      "petani": 0,
+      "montir": 0,
+      "kuli": 0,
+      "korbanngocok": 0,
+      "coal": 0,
+      "korekapi": 0,
+      "ayambakar": 0,
+      "gulai": 0,
+      "rendang": 0,
+      "ayamgoreng": 0,
+      "oporayam": 0,
+      "steak": 0,
+      "babipanggang": 0,
+      "ikanbakar": 0,
+      "lelebakar": 0,
+      "nilabakar": 0,
+      "bawalbakar": 0,
+      "udangbakar": 0,
+      "pausbakar": 0,
+      "kepitingbakar": 0,
+      "soda": 0,
+      "vodka": 0,
+      "ganja": 0,
+      "bandage": 0,
+      "sushi": 0,
+      "roti": 0,
+      "ramuan": 0,
+      "lastramuanclaim": 0,
+      "gems": 0,
+      "cupon": 0,
+      "lastgemsclaim": 0,
+      "eleksirb": 0,
+      "penduduk": 0,
+      "archer": 0,
+      "shadow": 0,
+      "laststringclaim": 0,
+      "lastpotionclaim": 0,
+      "lastswordclaim": 0,
+      "lastweaponclaim": 0,
+      "lastironclaim": 0,
+      "lastmancingclaim": 0,
+      "anakpancingan": 0,
+      "as": 0,
+      "paus": 0,
+      "kepiting": 0,
+      "gurita": 0,
+      "cumi": 0,
+      "buntal": 0,
+      "dory": 0,
+      "lumba": 0,
+      "lobster": 0,
+      "hiu": 0,
+      "lele": 0,
+      "nila": 0,
+      "bawal": 0,
+      "udang": 0,
+      "ikan": 0,
+      "orca": 0,
+      "banteng": 0,
+      "harimau": 0,
+      "gajah": 0,
+      "kambing": 0,
+      "panda": 0,
+      "buaya": 0,
+      "kerbau": 0,
+      "sapi": 0,
+      "monyet": 0,
+      "babihutan": 0,
+      "babi": 0,
+      "ayam": 0,
+      "apel": 20,
+      "ayamb": 0,
+      "ayamg": 0,
+      "ssapi": 0,
+      "sapir": 0,
+      "leleb": 0,
+      "leleg": 0,
+      "esteh": 0,
+      "pet": 0,
+      "potion": 0,
+      "sampah": 0,
+      "kucing": 0,
+      "kucinglastclaim": 0,
+      "kucingexp": 0,
+      "kuda": 0,
+      "kudalastclaim": 0,
+      "rubah": 0,
+      "rubahlastclaim": 0,
+      "rubahexp": 0,
+      "anjing": 0,
+      "anjinglastclaim": 0,
+      "anjingexp": 0,
+      "naga": 0,
+      "nagalastclaim": 0,
+      "griffin": 0,
+      "griffinlastclaim": 0,
+      "centaur": 0,
+      "fightnaga": 0,
+      "centaurlastclaim": 0,
+      "serigala": 0,
+      "serigalalastclaim": 0,
+      "serigalaexp": 0,
+      "phonix": 0,
+      "phonixlastclaim": 0,
+      "phonixexp": 0,
+      "makanannaga": 0,
+      "makananphonix": 0,
+      "makanancentaur": 0,
+      "makananserigala": 0,
+      "Banneduser": false,
+      "BannedReason": "",
+      "banned": false,
+      "bannedTime": 0,
+      "warn": 0,
+      "afk": -1,
+      "afkReason": "",
+      "anakkucing": 0,
+      "anakkuda": 0,
+      "anakrubah": 0,
+      "anakanjing": 0,
+      "makananpet": 0,
+      "makananPet": 0,
+      "antispam": 0,
+      "antispamlastclaim": 0,
+      "kayu": 0,
+      "batu": 0,
+      "string": 0,
+      "umpan": 0,
+      "armor": 0,
+      "armordurability": 0,
+      "weapon": 0,
+      "weapondurability": 0,
+      "sword": 0,
+      "sworddurability": 0,
+      "pickaxe": 0,
+      "pickaxedurability": 0,
+      "fishingrod": 0,
+      "fishingroddurability": 0,
+      "katana": 0,
+      "katanadurability": 0,
+      "bow": 0,
+      "bowdurability": 0,
+      "kapak": 0,
+      "kapakdurability": 0,
+      "axe": 0,
+      "axedurability": 0,
+      "pisau": 0,
+      "pisaudurability": 0,
+      "kerjasatu": 0,
+      "kerjadua": 0,
+      "kerjatiga": 0,
+      "kerjaempat": 0,
+      "kerjalima": 0,
+      "kerjaenam": 0,
+      "kerjatujuh": 0,
+      "kerjadelapan": 0,
+      "kerjasembilan": 0,
+      "kerjasepuluh": 0,
+      "kerjasebelas": 0,
+      "kerjaduabelas": 0,
+      "kerjatigabelas": 0,
+      "kerjaempatbelas": 0,
+      "kerjalimabelas": 0,
+      "pekerjaansatu": 0,
+      "pekerjaandua": 0,
+      "pekerjaantiga": 0,
+      "pekerjaanempat": 0,
+      "pekerjaanlima": 0,
+      "pekerjaanenam": 0,
+      "pekerjaantujuh": 0,
+      "pekerjaandelapan": 0,
+      "pekerjaansembilan": 0,
+      "pekerjaansepuluh": 0,
+      "pekerjaansebelas": 0,
+      "pekerjaanduabelas": 0,
+      "pekerjaantigabelas": 0,
+      "pekerjaanempatbelas": 0,
+      "pekerjaanlimabelas": 0,
+      "lastadventure": 0,
+      "lastwar": 0,
+      "lastberkebon": 0,
+      "lastberburu": 0,
+      "lastbansos": 0,
+      "lastrampok": 0,
+      "lastkill": 0,
+      "lastfishing": 0,
+      "lastdungeon": 0,
+      "lastduel": 0,
+      "lastmining": 0,
+      "lasthourly": 0,
+      "lastdagang": 0,
+      "lasthunt": 0,
+      "lasthun": 0,
+      "lastweekly": 0,
+      "lastmonthly": 0,
+      "lastyearly": 0,
+      "lastjb": 0,
+      "lastrob": 0,
+      "lastdaang": 0,
+      "lastngojek": 0,
+      "lastgrab": 0,
+      "lastngocok": 0,
+      "lastturu": 0,
+      "lastseen": 0,
+      "lastSetStatus": 0,
+      "registered": true,
+      "mangga": 0,
+      "stroberi": 0,
+      "semangka": 0,
+      "jeruk": 0,
+      "name": "yuuki",
+      "age": 18,
+      "regTime": 1775190742258,
+      "premiumDate": -1,
+      "premium": false,
+      "premiumTime": 0,
+      "vip": "tidak",
+      "vipPoin": 0,
+      "job": "Pengangguran",
+      "jobexp": 0,
+      "jail": false,
+      "penjara": false,
+      "antarpaket": 0,
+      "dirawat": false,
+      "lbars": "[▒▒▒▒▒▒▒▒▒]",
+      "role": "Newbie ㋡",
+      "autolevelup": true,
+      "lastIstigfar": 0,
+      "skill": "",
+      "korps": "",
+      "korpsgrade": "",
+      "demon": "",
+      "breaths": "",
+      "magic": "",
+      "darahiblis": 0,
+      "demonblood": 0,
+      "demonkill": 0,
+      "hashirakill": 0,
+      "alldemonkill": 0,
+      "allhashirakill": 0,
+      "attack": 0,
+      "speed": 0,
+      "strenght": 0,
+      "defense": 0,
+      "regeneration": 0,
+      "ovo": 0,
+      "dana": 0,
+      "gopay": 0,
+      "lastngaji": 0,
+      "lastlonte": 0,
+      "lastkoboy": 0,
+      "lastdate": 0,
+      "lasttambang": 0,
+      "lastngepet": 0,
+      "command": null,
+      "commandTotal": null,
+      "lastCmd": 1775202737254,
+      "glimit": 10,
+      "pertambangan": 0,
+      "lastbossbattle": 0,
+      "aqua": 0,
+      "glory": 0,
+      "enchant": 0,
+      "psepick": 0,
+      "psenjata": 0,
+      "lastgemclaim": 0,
+      "makanangriffin": 0,
+      "healthmonster": 0,
+      "anakserigala": 0,
+      "anaknaga": 0,
+      "anakphonix": 0,
+      "anakgriffin": 0,
+      "kyubi": 0,
+      "anakkyubi": 0,
+      "anakcentaur": 0,
+      "kingdom": false,
+      "lastsda": 0,
+      "lastberbru": 0,
+      "lastgift": 0,
+      "jualan": 0,
+      "lastjualan": 0,
+      "ngocokk": 0,
+      "lastngocokk": 0,
+      "lastcodereg": 0,
+      "anggur": 0,
+      "pisang": 0,
+      "bibitanggur": 0,
+      "bibitpisang": 0,
+      "bibitapel": 0,
+      "bibitmangga": 0,
+      "bibitjeruk": 0,
+      "ivylink": 66219,
+      "staking": {
+        "IVL": {
+          "amount": 10000,
+          "lastHarvest": 1775202732986
+        }
+      }
     }
   },
   "chats": {
@@ -5477,10 +5903,10 @@
           "bannedTime": 0,
           "chat": 0,
           "chatTotal": 0,
-          "command": 305,
-          "commandTotal": 305,
+          "command": 308,
+          "commandTotal": 308,
           "lastseen": 0,
-          "lastCmd": 1775045796753
+          "lastCmd": 1775187192121
         },
         "628989240628@s.whatsapp.net": {
           "blacklist": false,
@@ -5498,10 +5924,10 @@
           "bannedTime": 0,
           "chat": 0,
           "chatTotal": 0,
-          "command": 2752,
-          "commandTotal": 2752,
+          "command": 2767,
+          "commandTotal": 2767,
           "lastseen": 0,
-          "lastCmd": 1775118634188
+          "lastCmd": 1775188901160
         },
         "120363284305573016@g.us": {
           "blacklist": false,
@@ -5535,6 +5961,17 @@
           "commandTotal": 1,
           "lastseen": 0,
           "lastCmd": 1774436099110
+        },
+        "6285591068997@s.whatsapp.net": {
+          "blacklist": false,
+          "banned": false,
+          "bannedTime": 0,
+          "chat": 0,
+          "chatTotal": 0,
+          "command": 3,
+          "commandTotal": 3,
+          "lastseen": 0,
+          "lastCmd": 1775188989983
         }
       },
       "expired": 865771072210760,
@@ -5548,20 +5985,24 @@
       "isMuted": false,
       "memberStats": {
         "6282215415550@s.whatsapp.net": {
-          "chatCount": 915,
-          "lastSeen": 1775118638242
+          "chatCount": 927,
+          "lastSeen": 1775188828209
         },
         "6285324023198@s.whatsapp.net": {
-          "chatCount": 204,
-          "lastSeen": 1775045796751
+          "chatCount": 209,
+          "lastSeen": 1775188316746
         },
         "120363284305573016@g.us": {
-          "chatCount": 4,
-          "lastSeen": 1774578711117
+          "chatCount": 5,
+          "lastSeen": 1775188967318
         },
         "221203734204662@lid": {
           "chatCount": 2,
           "lastSeen": 1774528433454
+        },
+        "6285591068997@s.whatsapp.net": {
+          "chatCount": 3,
+          "lastSeen": 1775188989983
         }
       },
       "mutedUsers": [],
@@ -5794,10 +6235,10 @@
           "bannedTime": 0,
           "chat": 0,
           "chatTotal": 0,
-          "command": 234,
-          "commandTotal": 234,
+          "command": 254,
+          "commandTotal": 254,
           "lastseen": 0,
-          "lastCmd": 1775128101549
+          "lastCmd": 1775202690679
         },
         "120363406727405732@g.us": {
           "blacklist": false,
@@ -5841,6 +6282,17 @@
           "commandTotal": 1,
           "lastseen": 0,
           "lastCmd": 1775069548043
+        },
+        "6285591068997@s.whatsapp.net": {
+          "blacklist": false,
+          "banned": false,
+          "bannedTime": 0,
+          "chat": 0,
+          "chatTotal": 0,
+          "command": 7,
+          "commandTotal": 7,
+          "lastseen": 0,
+          "lastCmd": 1775202737254
         }
       },
       "expired": 0,
@@ -5850,8 +6302,8 @@
       "mutedUsers": [],
       "memberStats": {
         "6282215415550@s.whatsapp.net": {
-          "chatCount": 2123,
-          "lastSeen": 1775128101548
+          "chatCount": 2146,
+          "lastSeen": 1775202690678
         },
         "249348621369556@lid": {
           "chatCount": 9,
@@ -5866,12 +6318,16 @@
           "lastSeen": 1774217273333
         },
         "120363406727405732@g.us": {
-          "chatCount": 5,
-          "lastSeen": 1775069532282
+          "chatCount": 6,
+          "lastSeen": 1775189024461
         },
         "6283853531950@s.whatsapp.net": {
           "chatCount": 17,
           "lastSeen": 1775069602216
+        },
+        "6285591068997@s.whatsapp.net": {
+          "chatCount": 7,
+          "lastSeen": 1775202737252
         }
       },
       "tradingNews": true,
@@ -6218,8 +6674,8 @@
       "nsfw": false,
       "memberStats": {
         "120363424720606794@g.us": {
-          "chatCount": 1,
-          "lastSeen": 1774975271023
+          "chatCount": 2,
+          "lastSeen": 1775188967558
         }
       }
     },
@@ -6622,6 +7078,56 @@
       },
       "expired": 0,
       "nsfw": false
+    },
+    "6285591068997@s.whatsapp.net": {
+      "isBanned": false,
+      "welcome": true,
+      "welcometype": 1,
+      "detect": false,
+      "isBannedTime": false,
+      "mute": false,
+      "listStr": {},
+      "sWelcome": "Hai, @user!\nSelamat datang di grup @subject\n\n@desc",
+      "sBye": "Selamat tinggal @user!",
+      "sPromote": "",
+      "sDemote": "",
+      "delete": false,
+      "antiLink": false,
+      "antiLinknokick": false,
+      "antiSticker": false,
+      "antiStickernokick": false,
+      "viewonce": false,
+      "antiToxic": false,
+      "antilinkig": false,
+      "antilinkignokick": false,
+      "antilinkyt": false,
+      "antilinkytnokick": false,
+      "antilinktwit": false,
+      "antilinktwitnokick": false,
+      "antilinkfb": false,
+      "antilinkfbnokick": false,
+      "antilinkall": false,
+      "antilinkallnokick": false,
+      "antilinkwame": false,
+      "antilinkwamenokick": false,
+      "antilinktele": false,
+      "antilinktelenokick": false,
+      "antilinktt": false,
+      "antilinkttnokick": false,
+      "antibot": false,
+      "rpg": false,
+      "memgc": {
+        "628989240628@s.whatsapp.net": {
+          "blacklist": false,
+          "banned": false,
+          "bannedTime": 0,
+          "chat": 0,
+          "chatTotal": 0,
+          "command": 0,
+          "commandTotal": 0,
+          "lastseen": 0
+        }
+      }
     }
   },
   "stats": {
@@ -6650,10 +7156,10 @@
       "lastSuccess": 1774955318090
     },
     "menu.js": {
-      "total": 610,
-      "success": 610,
-      "last": 1775128101698,
-      "lastSuccess": 1775128101698
+      "total": 611,
+      "success": 611,
+      "last": 1775188982675,
+      "lastSuccess": 1775188982675
     },
     "_AI-agedetect.js": {
       "total": 7,
@@ -6668,10 +7174,10 @@
       "lastSuccess": 1773354165467
     },
     "owner-addmoney.js": {
-      "total": 19,
-      "success": 9,
-      "last": 1774253523190,
-      "lastSuccess": 1774253523190
+      "total": 22,
+      "success": 10,
+      "last": 1775202690680,
+      "lastSuccess": 1775202690680
     },
     "rpg-tf.js": {
       "total": 4,
@@ -6752,10 +7258,10 @@
       "lastSuccess": 1775116752925
     },
     "owner-clearsessions.js": {
-      "total": 40,
-      "success": 40,
-      "last": 1775068052521,
-      "lastSuccess": 1775068052521
+      "total": 42,
+      "success": 42,
+      "last": 1775188727905,
+      "lastSuccess": 1775188727905
     },
     "fun-taugasi.js": {
       "total": 4,
@@ -6830,10 +7336,10 @@
       "lastSuccess": 1770955490666
     },
     "owner-cleartmp.js": {
-      "total": 33,
-      "success": 33,
-      "last": 1775068058037,
-      "lastSuccess": 1775068058037
+      "total": 34,
+      "success": 34,
+      "last": 1775149080444,
+      "lastSuccess": 1775149080444
     },
     "owner-self.js": {
       "total": 12,
@@ -6884,10 +7390,10 @@
       "lastSuccess": 1773709888312
     },
     "xp-regist.js": {
-      "total": 16,
-      "success": 11,
-      "last": 1774253577142,
-      "lastSuccess": 1774253577142
+      "total": 17,
+      "success": 12,
+      "last": 1775190742258,
+      "lastSuccess": 1775190742258
     },
     "owner-addxp.js": {
       "total": 6,
@@ -6902,10 +7408,10 @@
       "lastSuccess": 0
     },
     "info-dashboard.js": {
-      "total": 73,
-      "success": 71,
-      "last": 1775071402605,
-      "lastSuccess": 1775071402605
+      "total": 74,
+      "success": 72,
+      "last": 1775190748660,
+      "lastSuccess": 1775190748660
     },
     "info-database.js": {
       "total": 17,
@@ -6914,10 +7420,10 @@
       "lastSuccess": 1774488402795
     },
     "info-status.js": {
-      "total": 34,
-      "success": 34,
-      "last": 1775014859746,
-      "lastSuccess": 1775014859746
+      "total": 35,
+      "success": 35,
+      "last": 1775207547527,
+      "lastSuccess": 1775207547527
     },
     "info-server.js": {
       "total": 24,
@@ -7046,10 +7552,10 @@
       "lastSuccess": 1770988752788
     },
     "group-add.js": {
-      "total": 14,
-      "success": 14,
-      "last": 1773742018672,
-      "lastSuccess": 1773742018672
+      "total": 16,
+      "success": 16,
+      "last": 1775188906001,
+      "lastSuccess": 1775188906001
     },
     "group-info.js": {
       "total": 7,
@@ -7214,10 +7720,10 @@
       "lastSuccess": 1771006696987
     },
     "info-tqto.js": {
-      "total": 3,
-      "success": 3,
-      "last": 1773169403536,
-      "lastSuccess": 1773169403536
+      "total": 4,
+      "success": 4,
+      "last": 1775128542822,
+      "lastSuccess": 1775128542822
     },
     "sticker-emoji.js": {
       "total": 3,
@@ -7250,10 +7756,10 @@
       "lastSuccess": 1774628817175
     },
     "info-sc.js": {
-      "total": 6,
-      "success": 6,
-      "last": 1773737177170,
-      "lastSuccess": 1773737177170
+      "total": 7,
+      "success": 7,
+      "last": 1775128479389,
+      "lastSuccess": 1775128479389
     },
     "internet-randbokep.js": {
       "total": 2,
@@ -7406,10 +7912,10 @@
       "lastSuccess": 1775100621584
     },
     "internet-fetch.js": {
-      "total": 89,
-      "success": 80,
-      "last": 1775104529429,
-      "lastSuccess": 1775104529429
+      "total": 91,
+      "success": 82,
+      "last": 1775150234704,
+      "lastSuccess": 1775150234704
     },
     "tools-tempmail.js": {
       "total": 5,
@@ -7484,10 +7990,10 @@
       "lastSuccess": 1771090932278
     },
     "tools-ogg.js": {
-      "total": 2,
-      "success": 2,
-      "last": 1771124934763,
-      "lastSuccess": 1771124934763
+      "total": 11,
+      "success": 11,
+      "last": 1775148839503,
+      "lastSuccess": 1775148839503
     },
     "game-tebak_pemain_bola_hint.js": {
       "total": 2,
@@ -7706,10 +8212,10 @@
       "lastSuccess": 1772453274013
     },
     "timer.js": {
-      "total": 18,
-      "success": 18,
-      "last": 1773743449566,
-      "lastSuccess": 1773743449566
+      "total": 23,
+      "success": 23,
+      "last": 1775131545423,
+      "lastSuccess": 1775131545423
     },
     "_jadwalsholat.js": {
       "total": 2,
@@ -7808,10 +8314,10 @@
       "lastSuccess": 1773144601310
     },
     "tools-uploader.js": {
-      "total": 6,
-      "success": 4,
-      "last": 1775045797344,
-      "lastSuccess": 1775045797344
+      "total": 7,
+      "success": 5,
+      "last": 1775187180230,
+      "lastSuccess": 1775187180230
     },
     "rpg-sawit.js": {
       "total": 11,
@@ -7880,10 +8386,10 @@
       "lastSuccess": 1775117515844
     },
     "owner-addplugin.js": {
-      "total": 56,
-      "success": 56,
-      "last": 1775069379296,
-      "lastSuccess": 1775069379296
+      "total": 66,
+      "success": 66,
+      "last": 1775207211057,
+      "lastSuccess": 1775207211057
     },
     "tools-iqc.js": {
       "total": 3,
@@ -7904,7 +8410,7 @@
       "lastSuccess": 1773160487835
     },
     "bukukas": {
-      "date": "0323",
+      "date": "0403",
       "count": 1
     },
     "owner-delkas.js": {
@@ -7944,10 +8450,10 @@
       "lastSuccess": 1773185069836
     },
     "asisten-export.js": {
-      "total": 4,
-      "success": 4,
-      "last": 1773704171186,
-      "lastSuccess": 1773704171186
+      "total": 5,
+      "success": 5,
+      "last": 1775207425384,
+      "lastSuccess": 1775207425384
     },
     "asisten-link_xlsx.js": {
       "total": 6,
@@ -7980,10 +8486,10 @@
       "lastSuccess": 1773400508582
     },
     "asisten-transaksi.js": {
-      "total": 10,
-      "success": 10,
-      "last": 1774270254082,
-      "lastSuccess": 1774270254082
+      "total": 12,
+      "success": 12,
+      "last": 1775207413463,
+      "lastSuccess": 1775207413463
     },
     "asisten-cek_saldo.js": {
       "total": 13,
@@ -8208,10 +8714,10 @@
       "lastSuccess": 1774865919130
     },
     "info-boost.js": {
-      "total": 18,
-      "success": 17,
-      "last": 1775068065317,
-      "lastSuccess": 1775068065317
+      "total": 20,
+      "success": 19,
+      "last": 1775188719790,
+      "lastSuccess": 1775188719790
     },
     "group-startgiveaway.js": {
       "total": 2,
@@ -8256,10 +8762,10 @@
       "lastSuccess": 1773779943380
     },
     "owner-findplugin.js": {
-      "total": 95,
-      "success": 95,
-      "last": 1775118480170,
-      "lastSuccess": 1775118480170
+      "total": 103,
+      "success": 103,
+      "last": 1775207516240,
+      "lastSuccess": 1775207516240
     },
     "internet-cuaca.js": {
       "total": 14,
@@ -8406,10 +8912,10 @@
       "lastSuccess": 1773704163709
     },
     "owner-findcode.js": {
-      "total": 29,
-      "success": 29,
-      "last": 1774256689559,
-      "lastSuccess": 1774256689559
+      "total": 31,
+      "success": 31,
+      "last": 1775142627683,
+      "lastSuccess": 1775142627683
     },
     "group-poll.js": {
       "total": 3,
@@ -8442,10 +8948,10 @@
       "lastSuccess": 1773541497794
     },
     "tools-cekresolusi.js": {
-      "total": 14,
-      "success": 14,
-      "last": 1775060797009,
-      "lastSuccess": 1775060797009
+      "total": 15,
+      "success": 15,
+      "last": 1775145482796,
+      "lastSuccess": 1775145482796
     },
     "rpg-polisi.js": {
       "total": 6,
@@ -8454,22 +8960,22 @@
       "lastSuccess": 1773547666960
     },
     "owner-sf.js": {
-      "total": 42,
-      "success": 37,
-      "last": 1775012773261,
-      "lastSuccess": 1775012773261
+      "total": 44,
+      "success": 39,
+      "last": 1775148681822,
+      "lastSuccess": 1775148681822
     },
     "owner-getfile.js": {
-      "total": 37,
-      "success": 31,
-      "last": 1774864995147,
-      "lastSuccess": 1774864995147
+      "total": 40,
+      "success": 34,
+      "last": 1775206690198,
+      "lastSuccess": 1775206690198
     },
     "owner-deletefile.js": {
-      "total": 16,
-      "success": 16,
-      "last": 1774891749587,
-      "lastSuccess": 1774891749587
+      "total": 17,
+      "success": 17,
+      "last": 1775148011369,
+      "lastSuccess": 1775148011369
     },
     "owner-renamefile.js": {
       "total": 6,
@@ -8550,10 +9056,10 @@
       "lastSuccess": 1773586901355
     },
     "info-ping.js": {
-      "total": 156,
-      "success": 156,
-      "last": 1775068925360,
-      "lastSuccess": 1775068925360
+      "total": 160,
+      "success": 160,
+      "last": 1775188978742,
+      "lastSuccess": 1775188978742
     },
     "info-info_bot.js": {
       "total": 3,
@@ -8616,10 +9122,10 @@
       "lastSuccess": 1773658968279
     },
     "trading-staking.js": {
-      "total": 31,
-      "success": 31,
-      "last": 1775127529916,
-      "lastSuccess": 1775127529916
+      "total": 40,
+      "success": 40,
+      "last": 1775202737411,
+      "lastSuccess": 1775202737411
     },
     "rpg-bank.js": {
       "total": 3,
@@ -8856,10 +9362,10 @@
       "lastSuccess": 1774669585321
     },
     "ai-nanobanana-edit.js": {
-      "total": 78,
-      "success": 78,
-      "last": 1775060549914,
-      "lastSuccess": 1775060549914
+      "total": 81,
+      "success": 81,
+      "last": 1775180168284,
+      "lastSuccess": 1775180168284
     },
     "melon.js": {
       "total": 2,
@@ -8892,22 +9398,22 @@
       "lastSuccess": 1774243433450
     },
     "trading-indicator.js": {
-      "total": 128,
-      "success": 128,
-      "last": 1775127608901,
-      "lastSuccess": 1775127608901
+      "total": 136,
+      "success": 136,
+      "last": 1775202701809,
+      "lastSuccess": 1775202701809
     },
     "trading-portfolio.js": {
-      "total": 21,
-      "success": 21,
-      "last": 1775127535607,
-      "lastSuccess": 1775127535607
+      "total": 22,
+      "success": 22,
+      "last": 1775182824234,
+      "lastSuccess": 1775182824234
     },
     "trading-trade.js": {
-      "total": 38,
-      "success": 38,
-      "last": 1774950114542,
-      "lastSuccess": 1774950114542
+      "total": 39,
+      "success": 39,
+      "last": 1775202717482,
+      "lastSuccess": 1775202717482
     },
     "trading-engine-core.js": {
       "total": 26,
@@ -8970,10 +9476,10 @@
       "lastSuccess": 1774364749171
     },
     "owner-github.js": {
-      "total": 43,
-      "success": 43,
-      "last": 1775070240727,
-      "lastSuccess": 1775070240727
+      "total": 44,
+      "success": 44,
+      "last": 1775128141142,
+      "lastSuccess": 1775128141142
     },
     "rpg-hitman.js": {
       "total": 2,
@@ -9000,10 +9506,10 @@
       "lastSuccess": 1774413179272
     },
     "tools-catbox.js": {
-      "total": 4,
-      "success": 4,
-      "last": 1775045758307,
-      "lastSuccess": 1775045758307
+      "total": 6,
+      "success": 6,
+      "last": 1775187194299,
+      "lastSuccess": 1775187194299
     },
     "ai-deepseek.js": {
       "total": 6,
@@ -9102,10 +9608,10 @@
       "lastSuccess": 1774851797243
     },
     "xdownloader-tiktok.js": {
-      "total": 6,
-      "success": 3,
-      "last": 1775037592019,
-      "lastSuccess": 1775007139752
+      "total": 17,
+      "success": 11,
+      "last": 1775148819678,
+      "lastSuccess": 1775148819678
     },
     "auditbot.js": {
       "total": 2,
@@ -9150,10 +9656,10 @@
       "lastSuccess": 1775117316349
     },
     "anggur.js": {
-      "total": 17,
-      "success": 17,
-      "last": 1775037616004,
-      "lastSuccess": 1775037616004
+      "total": 21,
+      "success": 21,
+      "last": 1775180108214,
+      "lastSuccess": 1775180108214
     },
     "tools-subdomain.js": {
       "total": 2,
@@ -9186,10 +9692,10 @@
       "lastSuccess": 1774980327098
     },
     "alpukat.js": {
-      "total": 4,
-      "success": 4,
-      "last": 1774979189714,
-      "lastSuccess": 1774979189714
+      "total": 5,
+      "success": 5,
+      "last": 1775141249444,
+      "lastSuccess": 1775141249444
     },
     "group-gantitag.js": {
       "total": 4,
@@ -9262,6 +9768,36 @@
       "success": 2,
       "last": 1775100598211,
       "lastSuccess": 1775100598211
+    },
+    "xdownloader-fb.js": {
+      "total": 6,
+      "success": 4,
+      "last": 1775150479237,
+      "lastSuccess": 1775150479237
+    },
+    "downloader-fb.js": {
+      "total": 3,
+      "success": 0,
+      "last": 1775150599368,
+      "lastSuccess": 0
+    },
+    "info-owner.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1775188990520,
+      "lastSuccess": 1775188990520
+    },
+    "owner-scanmodule.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1775207635745,
+      "lastSuccess": 1775207635745
+    },
+    "owner-modulesize.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1775207230399,
+      "lastSuccess": 1775207230399
     }
   },
   "msgs": {},
@@ -9363,95 +9899,95 @@
       ]
     },
     "trading": {
-      "lastUpdate": 1775128083495,
+      "lastUpdate": 1775207763883,
       "prices": {
-        "IVL": 19825,
-        "LBT": 423487,
-        "IRC": 2485665,
-        "LTN": 60277242,
-        "RSX": 199471813,
-        "TNX": 5221462854
+        "IVL": 18237,
+        "LBT": 241187,
+        "IRC": 4697424,
+        "LTN": 92364698,
+        "RSX": 808904937,
+        "TNX": 2939557111
       },
       "prevPrices": {
-        "IVL": 19495,
-        "LBT": 423988,
-        "IRC": 2394190,
-        "LTN": 58101731,
-        "RSX": 207505770,
-        "TNX": 5203846206
+        "IVL": 18790,
+        "LBT": 232310,
+        "IRC": 4689332,
+        "LTN": 91377266,
+        "RSX": 848398345,
+        "TNX": 2935978555
       },
       "history": {
         "IVL": [
-          17408,
-          17670,
-          17816,
-          18216,
-          18542,
-          18647,
-          19030,
-          19263,
-          19495,
-          19825
+          19380,
+          18992,
+          18901,
+          18563,
+          19078,
+          18808,
+          18731,
+          18359,
+          18790,
+          18237
         ],
         "LBT": [
-          384152,
-          393914,
-          402724,
-          420813,
-          437510,
-          446999,
-          425152,
-          439339,
-          423988,
-          423487
+          256466,
+          246388,
+          235552,
+          232181,
+          227404,
+          226720,
+          226064,
+          225468,
+          232310,
+          241187
         ],
         "IRC": [
-          2679925,
-          2680976,
-          2579142,
-          2506928,
-          2425974,
-          2453656,
-          2532805,
-          2437523,
-          2394190,
-          2485665
+          5186617,
+          4934220,
+          5062311,
+          4930149,
+          4853093,
+          4783281,
+          4890670,
+          4854662,
+          4689332,
+          4697424
         ],
         "LTN": [
-          54284261,
-          56471830,
-          54316176,
-          55730594,
-          58171028,
-          60541804,
-          59806374,
-          59906803,
-          58101731,
-          60277242
+          84139783,
+          85173856,
+          81022301,
+          83019279,
+          83874464,
+          85885824,
+          90081226,
+          87285242,
+          91377266,
+          92364698
         ],
         "RSX": [
-          194149468,
-          195157011,
-          194954894,
-          188310608,
-          189321555,
-          195494711,
-          204170099,
-          199039099,
-          207505770,
-          199471813
+          871621122,
+          888708070,
+          859698953,
+          855334567,
+          833805518,
+          866571151,
+          868084590,
+          843681906,
+          848398345,
+          808904937
         ],
         "TNX": [
-          4981522807,
-          5194825881,
-          5413908041,
-          5208741352,
-          5326320822,
-          5585037858,
-          5311382072,
-          5404189668,
-          5203846206,
-          5221462854
+          3011100364,
+          2928842303,
+          2910535867,
+          3035911218,
+          3129311392,
+          2995133007,
+          2946443627,
+          3073032609,
+          2935978555,
+          2939557111
         ]
       },
       "ath": {
@@ -9459,7 +9995,7 @@
         "LBT": 830158,
         "IRC": 8593017,
         "LTN": 95561381,
-        "RSX": 868963740,
+        "RSX": 950126889,
         "TNX": 9435608952
       },
       "momentum": {
@@ -9507,7 +10043,7 @@
         "120363406727405732@g.us",
         "120363284305573016@g.us"
       ],
-      "lastMinuteMarker": "2026-04-02 19:08",
+      "lastMinuteMarker": "2026-04-03 17:16",
       "vault": 623603386,
       "taxRates": {
         "IVL": 1.5,
@@ -9518,16 +10054,7 @@
         "TNX": 2
       },
       "taxProposal": null,
-      "eventHistory": [
-        {
-          "title": "BATTERY BREAKTHROUGH",
-          "time": 1775125443341
-        },
-        {
-          "title": "UPDATE FIRMWARE",
-          "time": 1775127483443
-        }
-      ],
+      "eventHistory": [],
       "announcerGroup": "120363284305573016@g.us",
       "lastDividendClaim": 1774356902237,
       "lastCanceledEvent": null,
@@ -9535,7 +10062,7 @@
         "IVL": "50%",
         "LBT": "50%",
         "IRC": "50%",
-        "LTN": "50%",
+        "LTN": "5%",
         "RSX": "50%",
         "TNX": "50%"
       }
