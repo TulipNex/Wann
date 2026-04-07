@@ -3,20 +3,20 @@ let handler = async (m, { conn, isAdmin }) => {
   if (m.fromMe) throw 'Tidak bisa digunakan pada nomor bot itu sendiri.'
   
   // Cek apakah user memang sudah menjadi admin atau belum
-  if (isAdmin) throw 'Kamu kan sudah jadi admin, ngapain minta naik jabatan lagi?'
+  if (!isAdmin) throw 'Kamu kan bukan admin, gimana mau diturunin jabatannya?'
   
-  // Proses promote (menaikkan jabatan)
-  await conn.groupParticipantsUpdate(m.chat, [m.sender], "promote")
-  m.reply('✅ Berhasil menaikkan jabatanmu menjadi Admin grup.')
+  // Proses demote (menurunkan jabatan)
+  await conn.groupParticipantsUpdate(m.chat, [m.sender], "demote")
+  m.reply('✅ Berhasil menurunkan jabatanmu dari Admin menjadi member biasa.')
 }
 
-handler.help = ['opromote']
+handler.help = ['odemote']
 handler.tags = ['owner']
-handler.command = /^(oadmin|opromote)$/i
+handler.command = /^(ounadmin|odemote)$/i
 
 // Pembatasan akses & syarat
 handler.rowner = true    // Hanya bisa diakses oleh Real Owner
 handler.group = true     // Hanya bisa digunakan di dalam grup
-handler.botAdmin = true  // Bot harus jadi admin agar bisa melakukan promote
+handler.botAdmin = true  // Bot harus jadi admin agar bisa melakukan demote
 
 module.exports = handler
