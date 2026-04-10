@@ -28,7 +28,7 @@ let handler = async (m, { conn, command }) => {
 
 handler.help = ['setnews', 'stopnews'];
 handler.tags = ['tulipnex'];
-handler.command = /^(setnews|setnew|stopnews)$/i;
+handler.command = /^(setnews|stopnews)$/i;
 handler.admin = true;
 handler.group = true; 
 

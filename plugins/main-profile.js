@@ -1,6 +1,7 @@
 let PhoneNumber = require('awesome-phonenumber')
 let levelling = require('../lib/levelling')
 const { createHash } = require('crypto')
+const { createCanvas, loadImage } = require('canvas') // Menambahkan library canvas
 
 let handler = async (m, { conn, usedPrefix, command, text }) => {
   let who = m.quoted ? m.quoted.sender : (m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : (text ? (text.replace(/[^0-9]/g, '') + '@s.whatsapp.net') : m.sender))
@@ -14,10 +15,15 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
   
   // Mengambil variabel activeTitle untuk menampilkan Gelar
   let { name, limit, exp, money, lastclaim, premiumTime, premium, registered, age, level, pasangan, activeTitle } = user
+  let username = registered ? name : await conn.getName(who) || 'User';
 
-  // Get Profile Picture & Bio
-  let pp = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXIdvC1Q4WL7_zA6cJm3yileyBT2OsWhBb9Q&usqp=CAU'
-  try { pp = await conn.profilePictureUrl(who, 'image') } catch (e) {}
+  // Get Profile Picture dengan fallback UI Avatars jika tidak ada/diprivasi
+  let ppUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXIdvC1Q4WL7_zA6cJm3yileyBT2OsWhBb9Q&usqp=CAU'
+  try { 
+      ppUrl = await conn.profilePictureUrl(who, 'image') 
+  } catch (e) {
+      ppUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=random&color=fff&size=512`;
+  }
   let about = ''; try { about = (await conn.fetchStatus(who)).status || '' } catch {}
 
   // 1. DYNAMIC RPG ROLE SYNC (Sesuai rpg-checkrole.js)
@@ -118,7 +124,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 
   let str = `
 *╭───[ 👤 PROFILE USER ]───*
-*│* 🆔 *Nama:* ${registered ? name : await conn.getName(who)}${displayTitle}
+*│* 🆔 *Nama:* ${username}${displayTitle}
 *│* 🏷️ *Tag:* @${who.split('@')[0]}
 *│* 📝 *Bio:* ${about || 'Tidak ada bio'}
 *│* 🎂 *Umur:* ${registered ? age + ' thn' : '-'}
@@ -147,11 +153,63 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
 *╰──────────────────*
 `.trim()
 
-  await conn.sendMessage(m.chat, { image: { url: pp }, caption: str, mentions: [who, ...(pasangan ? [pasangan] : [])] }, { quoted: m })
+  // 4. PEMBUATAN CANVAS MYUI (MENGGANTIKAN FOTO PROFIL BIASA)
+  let finalImage;
+  try {
+      const width = 1080;
+      const height = 640; 
+      const canvas = createCanvas(width, height);
+      const ctx = canvas.getContext('2d');
+
+      let bannerUrl = user?.profilebg || 'https://picsum.photos/1080/480'; 
+      let bannerImg, avatarImg;
+      
+      try {
+          bannerImg = await loadImage(bannerUrl);
+      } catch (err) {
+          bannerImg = await loadImage('https://picsum.photos/1080/480');
+      }
+      
+      avatarImg = await loadImage(ppUrl);
+
+      // Render Banner Atas
+      ctx.drawImage(bannerImg, 0, 0, width, 480);
+
+      // Render Foto Profil (Menimpa banner)
+      const avatarSize = 300;
+      const avatarX = width / 2;
+      const avatarY = 480;
+
+      // Membuat "border transparan"
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(avatarX, avatarY, (avatarSize / 2) + 10, 0, Math.PI * 2, true);
+      ctx.fill(); 
+      ctx.restore();
+
+      // Masking foto profil
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(avatarX, avatarY, avatarSize / 2, 0, Math.PI * 2, true);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(avatarImg, avatarX - (avatarSize / 2), avatarY - (avatarSize / 2), avatarSize, avatarSize);
+      ctx.restore();
+
+      finalImage = canvas.toBuffer('image/png');
+  } catch (e) {
+      console.error("Canvas Profile Error:", e);
+      // Fallback: Jika render canvas gagal, kirim foto profil secara langsung (default WhatsApp)
+      finalImage = { url: ppUrl };
+  }
+
+  // Kirim output gabungan antara Canvas UI dan teks
+  await conn.sendMessage(m.chat, { image: finalImage, caption: str, mentions: [who, ...(pasangan ? [pasangan] : [])] }, { quoted: m })
 }
 
 handler.help = ['profile', 'profil [@user]']
-handler.tags = ['info']
+handler.tags = ['main']
 handler.command = /^(profile?|profil)$/i
 
 module.exports = handler

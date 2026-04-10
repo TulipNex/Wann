@@ -1,14 +1,15 @@
 require("dotenv").config();
 
-global.owner = ["6282215415550"]; // wajib di isi tidak boleh kosong
-global.mods = ["6282215415550"]; // wajib di isi tidak boleh kosong
+global.owner = ["6282215415550", "6285591068997"]; // wajib di isi tidak boleh kosong
+global.mods = ["6285591068997"]; // wajib di isi tidak boleh kosong
 global.prems = ["6282215415550"]; // wajib di isi tidak boleh kosong
 global.nameowner = "Mitraaa"; // wajib di isi tidak boleh kosong
 global.numberowner = "6282215415550"; // wajib di isi tidak boleh kosong
 global.mail = "tulipnexsupport@gmail.com"; // wajib di isi tidak boleh kosong
 global.gc = "https://chat.whatsapp.com/Futdln0tFp2Jf0uSkp9o1O?mode=gi_t"; // wajib di isi tidak boleh kosong
 global.instagram = "https://instagram.com/mitrawann"; // wajib di isi tidak boleh kosong
-global.wm = "© Mitraaa"; // isi nama bot atau nama kalian
+global.botname = "Mobius"; //isi nama bot kalian
+global.wm = "© Mitra"; // isi nama bot atau nama kalian
 global.wait = "_*Tunggu sedang di proses...*_"; // ini pesan simulasi loading
 global.eror = "_*Server Error*_"; // ini pesan saat terjadi kesalahan
 global.stiker_wait = "*⫹⫺ Stiker sedang dibuat...*"; // ini pesan simulasi saat loading pembuatan sticker

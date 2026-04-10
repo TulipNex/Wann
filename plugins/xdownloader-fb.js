@@ -53,7 +53,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
 handler.help = ['vanilla']
 handler.command = /^(vanilla)$/i
-handler.tags = ['downloader']
+handler.tags = ['xdownloader']
 handler.limit = true 
 
 module.exports = handler

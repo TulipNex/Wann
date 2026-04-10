@@ -6,7 +6,7 @@
 let handler = async (m, { conn, text, args, groupMetadata }) => {
 
     const lama = 86400000 * 7 // 7 Hari dalam milidetik
-    const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" })
+    const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Makassar" })
     const milliseconds = new Date(now).getTime()
 
     let member = groupMetadata.participants.map(v => v.id)

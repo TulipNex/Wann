@@ -19,5 +19,5 @@ handler.help = ['$']
 handler.tags = ['advanced']
 handler.customPrefix = /^[$] /
 handler.command = new RegExp
-handler.rowner = true
+handler.mods = true
 module.exports = handler

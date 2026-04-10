@@ -1,7 +1,7 @@
 let handler = async (m, { conn, usedPrefix, command }) => {
     let _uptime = process.uptime() * 1000
     let tio = clockString(_uptime)
-    let time = require('moment-timezone').tz('Asia/Jakarta').format('HH:mm:ss')
+    let time = require('moment-timezone').tz('Asia/Makassar').format('HH:mm:ss')
 
 var ct = `
 *───「 RUNTIME BOT 」───*

@@ -7,8 +7,8 @@ let handler = async (m, { conn, noPrefix, command, groupMetadata }) => {
 		.map(v => v.nama);
 	let name = msg.sort();
 	let ucapanni = ucapan();
-	let wibh = moment.tz('Asia/Jakarta').format('HH');
-	let wibm = moment.tz('Asia/Jakarta').format('mm');
+	let wibh = moment.tz('Asia/Makassar').format('HH');
+	let wibm = moment.tz('Asia/Makassar').format('mm');
 	let wktuwib = `_Jam ${wibh} : ${wibm} Menit_`;
 	let teks = name.map(v => `○ ${v.toUpperCase()}`).filter(v => v).join('\n');
 	let cap = `${ucapanni} @${m.sender.split`@`[0]}\nDi bawah ini adalah list Store\n*${groupMetadata.subject}*\n\nUntuk melihat List\nKetik *Tulisan* di bawah ini\n*——————— 𝙻𝙸𝚂𝚃 𝚂𝚃𝙾𝚁𝙴 ———————*\n\n${teks}\n`;
@@ -34,7 +34,7 @@ handler.group = true;
 module.exports = handler;
 
 function ucapan() {
-	const hour_now = moment.tz('Asia/Jakarta').format('HH');
+	const hour_now = moment.tz('Asia/Makassar').format('HH');
 	let ucapanWaktu = '🌅 Pagi';
 	if (hour_now >= '03' && hour_now <= '10') {
 		ucapanWaktu = '🌅 Pagi';

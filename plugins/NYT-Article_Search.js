@@ -56,7 +56,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 };
 
 handler.help = ['nytsearch <query>'];
-handler.tags = ['nytimes'];
+handler.tags = ['news'];
 handler.command = /^(nytsearch|nyts)$/i;
 handler.limit = true;
 

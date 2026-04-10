@@ -41,15 +41,17 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
         let { metadata, download } = res.data
 
         // 5. Susun Caption Informasi
-        let caption = `*====[ YOUTUBE DOWNLOADER ]====*\n\n`
+        let caption = `*[ YOUTUBE DOWNLOADER ]*\n\n`
         caption += `*» Judul :* ${metadata.title}\n`
-        caption += `*» Tipe :* ${download.type.toUpperCase()}\n`
+        caption += `*» Tipe :* ${download.type.charAt(0).toUpperCase() + download.type.slice(1).toLowerCase()}\n`
         caption += `*» Kualitas :* ${download.quality}${isAudio ? '' : 'p'}\n\n`
-        caption += `*Media sedang dikirim, mohon tunggu sebentar...*\n`
-        caption += `\n${global.wm}`
+        caption += `*Media sedang dikirim, mohon tunggu sebentar...*`
+        //caption += `\n${global.wm}`
 
         // Kirim detail & thumbnail agar lebih informatif/interaktif
-        await conn.sendFile(m.chat, metadata.thumbnail, 'thumb.jpg', caption, m)
+       	if (isAudio) {
+    	await conn.sendFile(m.chat, metadata.thumbnail, 'thumb.jpg', caption, m)
+		}
 
         // 6. Pengiriman File Audio / Video
         if (isAudio) {
@@ -65,7 +67,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
                 video: { url: download.url }, 
                 mimetype: 'video/mp4', 
                 fileName: download.filename,
-                caption: `🎬 *Judul:* ${metadata.title}`
+                caption: `*[ YOUTUBE DOWNLOADER ]*\n\n *» Judul :* ${metadata.title}\n *» Kualitas :* ${download.quality}${isAudio ? '' : 'p'} \n *» Tipe :* ${download.type.charAt(0).toUpperCase() + download.type.slice(1).toLowerCase()}`
             }, { quoted: m })
         }
 
@@ -78,7 +80,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
 // Metadata Plugin
 handler.help = ['ytmp4 <link> [resolusi]', 'ytmp3 <link>', 'ytdl <link>']
-handler.tags = ['downloader']
+handler.tags = ['xdownloader']
 // Command akan aktif jika di depannya ada prefix lalu mengetik ytmp4, ytmp3, ytdl, ytv, atau yta
 handler.command = /^(ytmp4|ytmp3|ytdl|ytv|yta)$/i 
 

@@ -59,7 +59,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 };
 
 handler.help = ['nytpopular <1|7|30>'];
-handler.tags = ['nytimes'];
+handler.tags = ['news'];
 handler.command = /^(nytpopular|nytp)$/i;
 handler.limit = true;
 

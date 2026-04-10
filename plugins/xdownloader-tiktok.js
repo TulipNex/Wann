@@ -96,7 +96,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
 handler.help = ['apel']
 handler.command = /^(apel)$/i
-handler.tags = ['downloader']
+handler.tags = ['xdownloader']
 handler.limit = true 
 
 module.exports = handler

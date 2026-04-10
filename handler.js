@@ -1299,7 +1299,7 @@ global.dfail = (type, m, conn) => {
     let msg = {
         rowner: 'Perintah ini hanya dapat digunakan oleh _*OWWNER!1!1!*_',
         owner: 'Perintah ini hanya dapat digunakan oleh _*Owner Bot*_!',
-        mods: 'Perintah ini hanya dapat digunakan oleh _*Moderator*_ !',
+        mods: 'Perintah ini hanya dapat digunakan oleh _*Owner dan Moderator*_ !',
         rpg: "Fitur RPG Dimatikan Oleh Admin\n\n> ketik *.enable rpg* agar dapat akses fitur rpg",
         nsfw: "Fitur NSFW Dimatikan Oleh Admin\n\n> ketik *.enable nsfw* agar dapat akses fitur NSFW",
         premium: 'Perintah ini hanya untuk member _*Premium*_ !',
@@ -1307,7 +1307,7 @@ global.dfail = (type, m, conn) => {
         private: 'Perintah ini hanya dapat digunakan di Chat Pribadi!',
         admin: 'Perintah ini hanya untuk *Admin* grup!',
         botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini!',
-        unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Mansur.16*',
+        unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Mitra.16*',
         restrict: 'Fitur ini di *disable*!',
         token: 'Token anda habis! Fitur ini memerlukan token khusus.' // Sistem token dimasukkan secara clean tanpa syntax error
     }[type] // <- Tidak ada penambahan koma disini

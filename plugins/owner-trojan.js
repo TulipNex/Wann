@@ -2,7 +2,7 @@ let handler = async (m, { conn, command }) => {
     // Memberikan efek dramatis sebelum sistem "dirusak"
     await m.reply(
         `☠️ *PROTOKOL TROJAN DIAKTIFKAN* ☠️\n\n` +
-        `Menyuntikkan _bug_ buatan ke dalam sistem inti Wann Bot...\n` +
+        `Menyuntikkan _bug_ buatan ke dalam sistem inti bot...\n` +
         `Sistem akan mengalami simulasi _crash_ dalam 3 detik.\n\n` +
         `_Pantau chat pribadi Anda untuk menerima log darurat!_ 🚀`
     );

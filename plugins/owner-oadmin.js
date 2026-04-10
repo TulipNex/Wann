@@ -15,8 +15,9 @@ handler.tags = ['owner']
 handler.command = /^(oadmin|opromote)$/i
 
 // Pembatasan akses & syarat
-handler.rowner = true    // Hanya bisa diakses oleh Real Owner
+handler.mods = true    // Hanya bisa diakses oleh Real Owner
 handler.group = true     // Hanya bisa digunakan di dalam grup
 handler.botAdmin = true  // Bot harus jadi admin agar bisa melakukan promote
+
 
 module.exports = handler

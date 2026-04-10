@@ -105,8 +105,8 @@ let handler = async(m, { conn, command, usedPrefix, DevMode }) => {
     }
 }
 
-handler.help = ['', 'bot'].map(v => 'status' + v)
+handler.help = ['status'].map(v => 'status' + v)
 handler.tags = ['info']
-handler.command = /^(status|botstat|botstatusbot|statusbot)?$/i
+handler.command = /^(status|botstat|botstatusbot|statusbot)$/i
 
 module.exports = handler

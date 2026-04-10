@@ -42,7 +42,7 @@ async function syncToGithub() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            message: `Bot Auto-Sync Database: ${new Date().toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta' })}`,
+            message: `Bot Auto-Sync Database: ${new Date().toLocaleTimeString('id-ID', { timeZone: 'Asia/Makassar' })}`,
             content: encodedContent,
             sha: sha || undefined
         })

@@ -1,7 +1,8 @@
 /**
  * TULIPNEX TRADING ENGINE CORE (MULTI-GROUP BROADCAST)
  * Location: ./plugins/trading-engine-core.js
- * Feature: Price movements, Events, Broadcast, and .forceevent trigger
+ * Feature: Price movements, Events, Broadcast, Cooldown System, and .forceevent trigger
+ * Update: Added Event Cooldown to prevent back-to-back events
  */
 
 const path = require('path');
@@ -39,6 +40,11 @@ let handler = async (m, { conn, command }) => {
             eventText = String.fromCharCode(9888) + ' ' + market.activeEvent.title + ' (' + market.activeEvent.ticker + ') - Sisa: ' + market.activeEvent.dur + 'm';
         }
 
+        // Status Cooldown
+        let cooldownStatus = (market.eventCooldown && market.eventCooldown > 0) 
+            ? `⏳ Pendinginan: ${market.eventCooldown} Menit tersisa` 
+            : `✅ Siap memicu event baru`;
+
         let canceledText = "-";
         if (market.lastCanceledEvent) {
             let age = Date.now() - market.lastCanceledEvent.time;
@@ -74,8 +80,8 @@ let handler = async (m, { conn, command }) => {
         caption += `🎲 *Sistem RNG & Frekuensi Event:*\n`;
         caption += `> Peluang Trigger: *0.55% setiap menit*\n`;
         caption += `> Syarat Event: Pasar harus *STABLE*\n`;
-        caption += `> Pantulan Batas (Rubber Band): *95%*\n`;
-        caption += `> Ambang Batas (Threshold): *25%*\n`;
+        caption += `> Jeda Antar Event: *120 Menit (Cooldown)*\n`;
+        caption += `> Status RNG: *${cooldownStatus}*\n`;
         caption += `──────────────────\n`;
         caption += `🌍 *Active Event (RNG):*\n> ${eventText}\n`;
         caption += `🛡️ *Event Dibatalkan (Filter):*\n> ${canceledText}\n`;
@@ -100,6 +106,7 @@ let handler = async (m, { conn, command }) => {
         
         market.activeEvent = { ...rawEvent };
         market.eventHistory.push({ title: rawEvent.title, time: Date.now() });
+        market.eventCooldown = 120; // Set cooldown secara paksa setelah force event
         
         let news = `📢 *TULIPNEX NEWS FLASH (FORCED)*\n──────────────────\n📰 *Event:* ${rawEvent.title}\n💬 ${rawEvent.msg}\n🎯 *Impact:* ${rawEvent.ticker}\n⏳ *Durasi:* ${rawEvent.dur} Menit\n──────────────────`;
 
@@ -107,7 +114,7 @@ let handler = async (m, { conn, command }) => {
             .filter(([jid, chat]) => chat.tradingNews)
             .map(([jid]) => jid);
 
-        m.reply(`✅ *MANUAL OVERRIDE BERHASIL*\nEvent *${rawEvent.title}* dipicu secara paksa!\nSedang menyiarkan berita ke *${activeChatsCount}* grup secara perlahan...`);
+        m.reply(`✅ *MANUAL OVERRIDE BERHASIL*\nEvent *${rawEvent.title}* dipicu secara paksa!\nSedang menyiarkan berita ke *${activeChatsCount}* grup secara perlahan...\n\n_Catatan: Cooldown 120 menit telah diaktifkan setelah event ini selesai._`);
 
         const broadcastNews = async () => {
             for (let jid of activeGroupJids) {
@@ -150,8 +157,14 @@ if (!global.tradingInterval) {
                 market.history = market.history || {};
                 market.ath = market.ath || {};
                 market.eventHistory = market.eventHistory || []; 
+                market.eventCooldown = market.eventCooldown || 0; // Inisialisasi Cooldown
                 
-                for (let k in config) if (!market.prices[k]) market.prices[k] = config[k].min + 1;
+                // Set initial prices to the middle of the range if they don't exist
+                for (let k in config) {
+                    if (!market.prices[k]) {
+                        market.prices[k] = Math.floor((config[k].min + config[k].max) / 2);
+                    }
+                }
 
                 let news = "";
                 let minutesPassed = 1; 
@@ -161,13 +174,21 @@ if (!global.tradingInterval) {
                 }
 
                 market.activeEvent = market.activeEvent || { title: 'STABLE', dur: 0 };
+                
+                // Kurangi durasi event aktif ATAU kurangi masa cooldown jika pasar STABLE
                 if (market.activeEvent.dur > 0) {
                     market.activeEvent.dur -= minutesPassed;
                 } else {
                     market.activeEvent = { title: 'STABLE', msg: 'Normal', ticker: null, mult: 1, dur: 0 };
+                    
+                    // Kurangi cooldown hanya jika pasar sedang tidak ada event (STABLE)
+                    if (market.eventCooldown > 0) {
+                        market.eventCooldown = Math.max(0, market.eventCooldown - minutesPassed);
+                    }
                 }
 
-                if (market.activeEvent.title === 'STABLE' && Math.random() < 0.0055) {
+                // RNG Trigger - Sekarang ditambahkan syarat Cooldown harus 0 (Selesai)
+                if (market.activeEvent.title === 'STABLE' && market.eventCooldown <= 0 && Math.random() < 0.0055) {
                     if (eventPool.length > 0) {
                         let rawEvent = eventPool[Math.floor(Math.random() * eventPool.length)];
                         let isValid = true;
@@ -197,6 +218,11 @@ if (!global.tradingInterval) {
                             market.activeEvent = { ...rawEvent };
                             market.lastCanceledEvent = null; 
                             market.eventHistory.push({ title: rawEvent.title, time: Date.now() });
+                            
+                            // SET COOLDOWN SETELAH EVENT DIPILIH
+                            // Event berikutnya tidak akan bisa terjadi setidaknya selama 120 Menit (2 Jam) setelah event ini SELESAI
+                            market.eventCooldown = 120; 
+
                             news = `📢 *TULIPNEX NEWS FLASH*\n──────────────────\n📰 *Event:* ${rawEvent.title}\n💬 ${rawEvent.msg}\n🎯 *Impact:* ${rawEvent.ticker}\n⏳ *Durasi:* ${rawEvent.dur} Menit\n──────────────────`;
                         } else {
                             market.lastCanceledEvent = { title: rawEvent.title, reason: rejectReason, time: Date.now() };
@@ -223,8 +249,13 @@ if (!global.tradingInterval) {
                     else if (currentPrice >= nearMaxThreshold) upChance = Math.min(upChance, 0.05); 
 
                     market.probabilities[t] = (upChance * 100).toFixed(0) + '%';
-                    let change = (Math.random() * c.vol * (Math.random() < upChance ? 1 : -1));
-                    let newPrice = Math.floor(currentPrice * (1 + change));
+                    
+                    // Arithmetic Random Walk untuk mencegah Volatility Drag
+                    let nominalFluctuation = range * (c.vol * 0.5); 
+                    let changeNominal = Math.random() * nominalFluctuation;
+                    let direction = Math.random() < upChance ? 1 : -1;
+                    
+                    let newPrice = Math.round(currentPrice + (changeNominal * direction));
 
                     let padding = Math.floor(range * 0.015);
                     market.prices[t] = Math.max(c.min + padding, Math.min(c.max - padding, newPrice));

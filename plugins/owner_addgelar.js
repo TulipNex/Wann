@@ -89,7 +89,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     // ==========================================
     // 2. TAMBAH GELAR CUSTOM (TEKS BEBAS)
     // ==========================================
-    if (cmd === 'addcustomgelar' || cmd === 'customgelar') {
+    if (cmd === 'cstgelar' || cmd === 'customgelar') {
         let target = null;
         let titleName = "";
 
@@ -129,9 +129,9 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     }
 }
 
-handler.help = ['addgelar <nomor/tag> <id>', 'addcustomgelar <nomor/tag> <teks>']
+handler.help = ['addgelar <nomor/tag> <id>', 'cstgelar <@user> <teks>']
 handler.tags = ['god']
-handler.command = /^(addgelar|addcustomgelar|customgelar)$/i
+handler.command = /^(addgelar|cstgelar|customgelar)$/i
 handler.owner = true;
 handler.private = true;
 

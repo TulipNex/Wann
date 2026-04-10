@@ -1,6 +1,6 @@
 let moment = require('moment-timezone');
 const fs = require('fs');
-const timeZone = 'Asia/Jakarta';
+const timeZone = 'Asia/Makassar';
 
 let handler = async (m, { conn, command, args, isOwner }) => {
     if (!isOwner) throw 'Perintah ini hanya untuk owner bot!';

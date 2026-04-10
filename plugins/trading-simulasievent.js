@@ -1,8 +1,7 @@
 /**
  * TULIPNEX EVENT SIMULATOR (Admin Override & Engine Sync)
  * Location: ./plugins/trading-simulasievent.js
- * Feature: Force trigger events and broadcast to Announcer Group
- * [AUDIT FIX]: Push event paksaan Admin ke eventHistory agar masuk rekapan
+ * Feature: Force trigger events, Broadcast to Multi-Group, and Cooldown Sync
  */
 
 const path = require('path');
@@ -14,21 +13,36 @@ if (fs.existsSync(eventPath)) {
     eventPool = require(eventPath);
 }
 
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 let handler = async (m, { conn, text, usedPrefix, command }) => {
     global.db.data.settings = global.db.data.settings || {};
     if (!global.db.data.settings.trading) return m.reply('[!] Sistem belum aktif. Tunggu Engine menyala.');
     
     let market = global.db.data.settings.trading;
 
+    // Ambil semua grup yang mengaktifkan fitur berita trading
+    let activeGroupJids = Object.entries(global.db.data.chats || {})
+        .filter(([jid, chat]) => chat.tradingNews)
+        .map(([jid]) => jid);
+
     // --- 1. COMMAND: STOPEVENT ---
     if (command === 'stopevent') {
         market.activeEvent = { title: 'STABLE', msg: 'Pasar berjalan normal.', ticker: null, mult: 1, dur: 0 };
         
-        let msg = '✅ *EVENT STOPPED*: Pasar kembali stabil.';
+        // [SYNC ENGINE]: Reset Cooldown agar mesin bisa melempar RNG lagi jika kondisi stabil
+        market.eventCooldown = 0; 
         
-        // Broadcast ke grup utama jika admin mematikannya dari PC
-        if (market.announcerGroup && market.announcerGroup !== m.chat) {
-            await conn.reply(market.announcerGroup, `📢 *TULIPNEX INFO*\nOtoritas Bursa telah menstabilkan pasar. Kondisi kembali normal.`, null);
+        let msg = '✅ *EVENT STOPPED*: Pasar kembali stabil & Cooldown di-reset menjadi 0.';
+        
+        // Broadcast penghentian event ke grup-grup
+        for (let jid of activeGroupJids) {
+            if (jid !== m.chat) { // Jangan double send ke grup tempat admin ngetik
+                try {
+                    await conn.reply(jid, `📢 *TULIPNEX INFO*\nOtoritas Bursa (Admin) telah melakukan intervensi. Kondisi pasar kembali stabil secara paksa.`, null);
+                    await delay(500);
+                } catch (e) {}
+            }
         }
         return m.reply(msg);
     }
@@ -67,25 +81,36 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     if (!targetEvent) return m.reply(`[!] Event *${text}* tidak ditemukan. Cek ejaan Anda.`);
 
-    // Set event ke database (Akan langsung dieksekusi oleh Announcer di menit berikutnya)
+    // Set event ke database (Akan diolah oleh mesin utama di menit berikutnya)
     market.activeEvent = { ...targetEvent };
     
-    // [AUDIT FIX]: Catat juga secara manual ke dalam history 1 Jam agar terbaca oleh cekevent
+    // [SYNC ENGINE]: Set Cooldown selama 120 menit agar mesin tidak tumpang tindih memicu event baru
+    market.eventCooldown = 120;
+    
+    // Catat secara manual ke dalam history 1 Jam agar terbaca oleh command cekevent
     market.eventHistory = market.eventHistory || [];
     market.eventHistory.push({
         title: `(ADMIN) ${targetEvent.title}`,
         time: Date.now()
     });
     
-    let newsFlash = `📢 *TULIPNEX NEWS FLASH*\n──────────────────\n📰 *Event:* ${market.activeEvent.title}\n💬 ${market.activeEvent.msg}\n🎯 *Impact:* ${market.activeEvent.ticker === 'GLOBAL' ? 'SELURUH PASAR' : market.activeEvent.ticker}\n⏳ *Durasi:* ${market.activeEvent.dur} Menit\n──────────────────`;
+    let newsFlash = `📢 *TULIPNEX NEWS FLASH (ADMIN OVERRIDE)*\n──────────────────\n📰 *Event:* ${market.activeEvent.title}\n💬 ${market.activeEvent.msg}\n🎯 *Impact:* ${market.activeEvent.ticker === 'GLOBAL' ? 'SELURUH PASAR' : market.activeEvent.ticker}\n⏳ *Durasi:* ${market.activeEvent.dur} Menit\n──────────────────`;
     
-    // Broadcast langsung ke grup pasar jika admin memicunya dari tempat lain (seperti PC)
-    if (market.announcerGroup && market.announcerGroup !== m.chat) {
-        await conn.reply(market.announcerGroup, newsFlash, null);
-        return m.reply(`✅ Berhasil memicu paksa event: *${market.activeEvent.title}*\nBerita telah berhasil disiarkan ke saluran resmi!`);
-    } else {
-        // Jika admin memicunya langsung di dalam grup pasar, cukup reply saja
-        return m.reply(newsFlash);
+    m.reply(`✅ Berhasil memicu paksa event: *${market.activeEvent.title}*\nMenyiarkan berita ke *${activeGroupJids.length}* grup terdaftar...\n_Catatan: Cooldown mesin diset ke 120 Menit._`);
+
+    // Broadcast ke semua grup terdaftar menggunakan looping + delay (Anti Spam)
+    for (let jid of activeGroupJids) {
+        if (jid !== m.chat) { 
+            try {
+                await conn.reply(jid, newsFlash, null);
+                await delay(500);
+            } catch (e) {}
+        }
+    }
+    
+    // Jika admin ngetik di grup trading, kirim juga kesini sebagai penutup
+    if (activeGroupJids.includes(m.chat)) {
+        await conn.reply(m.chat, newsFlash, null);
     }
 }
 
@@ -93,6 +118,6 @@ handler.help = ['setevent <judul/random>', 'stopevent']
 handler.tags = ['god']
 handler.command = /^(setevent|stopevent)$/i
 handler.owner = true;
-handler.private = true;
+handler.private = true; // Dihapus agar admin bisa menggunakan ini langsung di dalam grup
 
 module.exports = handler;

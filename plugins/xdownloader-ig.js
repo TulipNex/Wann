@@ -22,12 +22,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     let meta = result.metadata || {};
 
     // Membuat caption dari metadata
-    let cap = `*乂 I N S T A G R A M*\n\n`;
+    let cap = `*I N S T A G R A M*\n\n`;
     if (meta.username) cap += `  ◦ *Username:* ${meta.username}\n`;
     if (meta.like) cap += `  ◦ *Likes:* ${meta.like}\n`;
     if (meta.comment) cap += `  ◦ *Comments:* ${meta.comment}\n`;
     if (meta.caption) cap += `  ◦ *Caption:* ${meta.caption}\n\n`;
-    //cap += `_*Wann Assistant | Powered by TulipNex*_`;
 
     // Looping jika media lebih dari satu (Carousel)
     for (let i = 0; i < mediaUrls.length; i++) {
@@ -47,7 +46,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 }
 
 handler.help = ['anggur <link>'];
-handler.tags = ['downloader'];
+handler.tags = ['xdownloader'];
 handler.command = /^(anggur)$/i;
 // handler.limit = true; // Uncomment jika ingin menggunakan sistem limit
 

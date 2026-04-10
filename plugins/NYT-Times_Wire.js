@@ -50,7 +50,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 };
 
 handler.help = ['nytwire'];
-handler.tags = ['nytimes'];
+handler.tags = ['news'];
 handler.command = /^(nytwire|nytw)$/i;
 handler.limit = true;
 

@@ -1,6 +1,6 @@
 module.exports = {
   before: async function all(m) {
-    const jakarta = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+    const jakarta = new Date().toLocaleString('en-US', { timeZone: 'Asia/Makassar' });
     const current = new Date(jakarta);
     
     if (current.getHours() === 0 && current.getMinutes() === 0) {

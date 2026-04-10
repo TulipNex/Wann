@@ -33,7 +33,7 @@ const handler = async (m, { conn, usedPrefix, command, groupMetadata, isOwner, i
   /* * XM4ZE - XMYULA-MD
    * github.com/XM4ZE/XMYULA-MD
    */
-  const time = moment().tz('Asia/Jakarta');
+  const time = moment().tz('Asia/Makassar');
   const dateTime = time.format('DD/MM/YYYY HH:mm:ss');
 
   // XM4ZE - Do not remove this watermark!

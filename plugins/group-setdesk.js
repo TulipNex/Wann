@@ -6,7 +6,7 @@ let handler = async (m, { conn, command, usedPrefix, text }) => {
 
 handler.help = ['setdeskgroup <text>']
 handler.tags = ['group']
-handler.command = /^(setdesk|setdeskripsi|setdeskripsigc|setdeskripsigroup|setdeskripsigrup|setdeskgc)?$/i
+handler.command = /^(setdesk|setdeskripsi|setdeskripsigc|setdeskripsigroup|setdeskripsigrup|setdeskgc)$/i
 handler.owner = false
 handler.mods = false
 handler.premium = false

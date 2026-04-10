@@ -5,42 +5,42 @@ let moment = require('moment-timezone')
 let levelling = require('../lib/levelling')
 
 let arrayMenu = [
-  'all', 'tulipnex', 'efootball', 'nytimes', 'ai', 'main', 'downloader', 'database', 'rpg', 'rpgG', 
+  'all', 'tulipnex', 'efootball', 'ai', 'main', 'downloader', 'database', 'rpg', 'rpgG', 
   'sticker', 'advanced', 'xp', 'fun', 'game', 'github', 'group', 'info', 
   'internet', 'islam', 'maker', 'news', 'owner', 'voice', 'store', 'stalk', 
-  'shortlink', 'tools', 'anonymous', ''
+  'shortlink', 'tools', 'anonymous', 'xdownloader', ''
 ];
 
 const allTags = {
-    'all': 'SEMUA MENU',
-    'tulipnex': 'TULIPNEX (CBE)',
-    'efootball': 'eFootball',
-    'nytimes': 'New York Times',
-    'ai': 'MENU AI',
-    'main': 'MENU UTAMA',
-    'downloader': 'MENU DOWNLOADER',
-    'database': 'MENU DATABASE',
-    'rpg': 'MENU RPG',
-    'rpgG': 'MENU RPG GUILD',
-    'sticker': 'MENU CONVERT',
-    'advanced': 'ADVANCED',
-    'xp': 'MENU EXP',
-    'fun': 'MENU FUN',
-    'game': 'MENU GAME',
-    'github': 'MENU GITHUB',
-    'group': 'MENU GROUP',
-    'info': 'MENU INFO',
-    'internet': 'INTERNET',
-    'islam': 'MENU ISLAMI',
-    'maker': 'MENU MAKER',
-    'news': 'MENU NEWS',
-    'owner': 'MENU OWNER',
-    'voice': 'PENGUBAH SUARA',
-    'store': 'MENU STORE',
-    'stalk': 'MENU STALK',
-    'shortlink': 'SHORT LINK',
-    'tools': 'MENU TOOLS',
-    'anonymous': 'ANONYMOUS CHAT',
+    'all': '🗂️ MENU ALL',
+    'tulipnex': '📊 TULIPNEX (CBE)',
+    'efootball': '⚽ eFootball',
+    'ai': '🤖 MENU AI',
+    'main': '🏠 MENU UTAMA',
+    'downloader': '📥 MENU DOWNLOADER',
+    'database': '📂 MENU DATABASE',
+    'rpg': '⚔️ MENU RPG',
+    'rpgG': '🏰 MENU RPG GUILD',
+    'sticker': '🎨 MENU CONVERT',
+    'advanced': '⚙️ ADVANCED',
+    'xp': '✨ MENU EXP',
+    'fun': '🎡 MENU FUN',
+    'game': '🎮 MENU GAME',
+    'github': '💻 MENU GITHUB',
+    'group': '👥 MENU GROUP',
+    'info': '📑 MENU INFO',
+    'internet': '🌐 INTERNET',
+    'islam': '🕌 MENU ISLAMI',
+    'maker': '🏗️ MENU MAKER',
+    'news': '📰 MENU NEWS',
+    'owner': '👑 MENU OWNER',
+    'voice': '🎙️ PENGUBAH SUARA',
+    'store': '🛒 MENU STORE',
+    'stalk': '🕵️ MENU STALK',
+    'shortlink': '🔗 SHORT LINK',
+    'tools': '🧰 MENU TOOLS',
+    'anonymous': '🎭 ANONYMOUS CHAT',
+    'xdownloader' : '❇️ XDOWNLOADER',
     '': 'NO CATEGORY'
 }
 
@@ -55,8 +55,8 @@ Selamat datang di pusat kontrol.
  ⚬ *Tanggal* : %date
  ⚬ *Prefix* : [ %p ]
 `.trimStart(),
-    header: '\n*✦ %category*',
-    body: '  ⌑ %cmd %islimit %isPremium',
+    header: '\n*%category*',
+    body: '  ● %cmd %islimit %isPremium',
     footer: '',
     after: `\n> *Hint:* Ketik *%pmenu <kategori>* untuk membuka menu.\n\n> Contoh: *%pmenu tools*`
 }
@@ -99,7 +99,7 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
             let menuList = `${defaultMenu.before}\n\n*A V A I L A B L E   M E N U S*\n`
             for (let tag of arrayMenu) {
                 if (tag && allTags[tag] && !hiddenCategories.includes(tag)) {
-                    menuList += `  ⚬ ${_p}menu ${tag}\n`
+                    menuList += `  ● ${_p}menu ${tag}\n`
                 }
             }
             menuList += `\n${defaultMenu.after}`
@@ -115,12 +115,12 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
                             newsletterJid: '120363407187309269@newsletter',
-                            newsletterName: '𝗗𝗔𝗦𝗛𝗕𝗢𝗔𝗥𝗗 𝗠𝗘𝗡𝗨',
+                            newsletterName: 'DASHBOARD',
                             serverMessageId: 127
                         },
                         mentionedJid: [m.sender],
                         externalAdReply: {
-                            title: 'Wann',
+                            title: global.botname,
                             body: 'Powered by TulipNex',
                             mediaType: 1,
                             previewType: 0,
@@ -199,12 +199,12 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command, isOwner }) =
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363407187309269@newsletter',
-                        newsletterName: '𝗗𝗔𝗦𝗛𝗕𝗢𝗔𝗥𝗗 𝗠𝗘𝗡𝗨',
+						newsletterName: `DASHBOARD ${allTags[teks].replace(/[^\x00-\x7F]/g, '').trim().toUpperCase()}`,
                         serverMessageId: 127
                     },
                     mentionedJid: [m.sender],
                     externalAdReply: {
-                        title: 'Wann',
+                        title: global.botname,
                         body: 'Powered by TulipNex',
                         mediaType: 1,
                         previewType: 0,

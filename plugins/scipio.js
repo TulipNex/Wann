@@ -2,13 +2,14 @@ process.env.TZ = 'Asia/Makassar'
 let moment = require('moment-timezone')
 
 const allTags = {
+    'keuangan': 'MENU KEUANGAN',
     'asisten': 'MENU ASISTEN',
     'god': '⚙️ ROOT COMMANDS'
 }
 
 const defaultMenu = {
     before: `
-Hi %name
+Halo Tuan %name
 
 Anda mengakses _*Superuser Area*_.
 Berhati-hatilah dalam menggunakan perintah eksekutif di bawah ini.
@@ -59,7 +60,7 @@ let handler = async (m, { conn, usedPrefix: _p, command, isOwner }) => {
             }
         })
 
-        let hiddenCategories = ['god', 'asisten'];
+        let hiddenCategories = ['god', 'asisten', 'keuangan'];
         let hiddenMenu = defaultMenu.before + '\n\n';
         
         for (let tag of hiddenCategories) {
