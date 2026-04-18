@@ -1,39 +1,59 @@
-const fetch = require('node-fetch');
+const axios = require('axios')
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {  
-    if (!args[0]) throw `Gunakan contoh ${usedPrefix}${command} https://www.facebook.com/watch/?v=1393572814172251`;
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) throw `Masukan URL!\n\ncontoh:\n${usedPrefix + command} https://www.facebook.com/share/p/18JhbewbAS/`
+
+    // Validasi ketat Regex untuk berbagai variasi URL Facebook
+    if (!/facebook\.com|fb\.watch|fb\.gg|fb\.com/i.test(text)) {
+        throw `URL tidak valid. Pastikan itu adalah tautan Facebook yang benar.`
+    }
+
+    m.reply('⏳ Lagi diproses...')
+
     try {
-        await m.reply(wait)
-        const res = await fetch(`https://api.botcahx.eu.org/api/dowloader/fbdown3?url=${args[0]}&apikey=${btc}`);
-        const json = await res.json();
-        let urls = json.result.url.urls;
-        if (!Array.isArray(urls)) {
-            throw `Tidak dapat mendapatkan URL video dari tautan yang diberikan`;
+        // Melakukan request ke endpoint API Baguss
+        const { data } = await axios.get(`https://api.baguss.xyz/api/download/facebook?url=${encodeURIComponent(text)}`)
+
+        // Pengecekan status success dari JSON
+        if (!data.success || !data.data || data.data.length === 0) {
+            throw 'Gagal mengambil data dari API atau video diprivasi.'
         }
-        for (let url of urls) {
-            if (url.sd) {
-                conn.sendFile(m.chat, url.sd, 'fb.mp4', `*Facebook Downloader*`, m);
-                return;
-            } else if (url.hd) {
-                conn.sendFile(m.chat, url.hd, 'fb.mp4', `*Facebook Downloader*`, m);
-                return;
-            }
+
+        // Filter media yang valid (menghindari URL "/" seperti pada kasus audio 320kbps)
+        let validMedia = data.data.filter(v => v.url && v.url.startsWith('http'))
+
+        if (validMedia.length === 0) {
+            throw 'Tidak ada link media yang valid/dapat diunduh dari postingan ini.'
         }
-        throw `Tidak ditemukan URL video SD atau HD`;
-    } catch (error) {
-        console.log(error);
-        throw 'Terjadi kesalahan pada saat melakukan proses download';
+
+        // Logika penyortiran kualitas (Mencari resolusi tertinggi)
+        let hd1080 = validMedia.find(v => v.quality.includes('1080p'))
+        let hd720 = validMedia.find(v => v.quality.includes('720p'))
+        let sd = validMedia.find(v => v.quality.includes('360p') || v.quality.includes('SD'))
+
+        // Menentukan final URL dan teks kualitas
+        let finalUrl = hd1080 ? hd1080.url : (hd720 ? hd720.url : (sd ? sd.url : validMedia[0].url))
+        let qualityText = hd1080 ? '1080p' : (hd720 ? '720p (HD)' : (sd ? '360p (SD)' : validMedia[0].quality))
+
+        // 🔥 PERBAIKAN DI SINI: Unescape HTML entities (&amp; menjadi &)
+        finalUrl = finalUrl.replace(/&amp;/g, '&')
+
+        // Mengirimkan hasil video ke User
+        await conn.sendMessage(m.chat, {
+            video: { url: finalUrl },
+            caption: `🎬 *Facebook Video*\n📈 *Kualitas:* ${qualityText}\n\n> _Diunduh menggunakan ${data.creator} API._`
+        }, { quoted: m })
+
+    } catch (e) {
+        // Menangkap error jika API mati atau request gagal
+        console.error(e)
+        throw `Terjadi kesalahan saat mengunduh video:\n${e.message || e}`
     }
 }
-handler.help = ['facebook'].map(v => v + ' <url>');
-handler.command = /^(fb|facebook|facebookdl|fbdl|fbdown|dlfb)$/i;
-handler.tags = ['downloader'];
-handler.limit = true;
-handler.group = false;
-handler.premium = false;
-handler.owner = false;
-handler.admin = false;
-handler.botAdmin = false;
-handler.fail = null;
-handler.private = false;
-module.exports = handler;
+
+handler.help = ['facebook <link>']
+handler.command = /^(facebook|fb)$/i
+handler.tags = ['downloader']
+handler.limit = true 
+
+module.exports = handler

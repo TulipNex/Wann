@@ -1,99 +1,110 @@
-const fetch = require("node-fetch");
+/**
+ * Plugin: Spotify Search & Downloader
+ * Description: Mencari dan mengunduh lagu dari Spotify
+ * Author: Senior Bot Developer
+ */
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-  if (!args[0]) throw `*🚩 Masukkan URL atau judul lagu!*\n\nExample:\n${usedPrefix + command} https://open.spotify.com/track/3zakx7RAwdkUQlOoQ7SJRt\n\nExample:\n${usedPrefix + command} payung teduh`;
-  if (args[0].match(/https:\/\/open.spotify.com/gi)) {
-    m.reply(wait);
-    try {
-      const res = await fetch(`https://api.botcahx.eu.org/api/download/spotify?url=${args[0]}&apikey=${btc}`);
-      let jsons = await res.json();
-      const {
-        thumbnail,
-        title,
-        name,
-        duration,
-        url
-      } = jsons.result.data;
-      const {
-        id,
-        type
-      } = jsons.result.data.artist;
-      let captionvid = ` ∘ Title: ${title}\n∘ Id: ${id}\n∘ Duration: ${duration}\n∘ Type: ${type}`;
-      let pesan = await conn.sendMessage(m.chat, {
-        text: captionvid,
-        contextInfo: {
-          externalAdReply: {
-            title: "Spotify Downloader",
-            body: "",
-            thumbnailUrl: thumbnail,
-            sourceUrl: args[0],
-            mediaType: 1,
-            showAdAttribution: false,
-            renderLargerThumbnail: true
-          }
-        }
-      });
-      await conn.sendMessage(m.chat, {
-        audio: {
-          url: url
-        },
-        mimetype: 'audio/mpeg',
-        contextInfo: {
-          externalAdReply: {
-            title: title,
-            body: "",
-            thumbnailUrl: thumbnail,
-            sourceUrl: args[0],
-            mediaType: 1,
-            showAdAttribution: false,
-            renderLargerThumbnail: true
-          }
-        }
-      }, {
-        quoted: m
-      });
-    } catch (e) {
-      throw `🚩 ${eror}`;
+const spotify = require('../lib/spotify');
+
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+    // 1. Validasi Input Dasar
+    if (!text) {
+        let txt = `*Contoh Penggunaan:*\n`;
+        txt += `⭔ *Pencarian:* ${usedPrefix}${command} about you\n`;
+        txt += `⭔ *Download:* ${usedPrefix}${command} https://open.spotify.com/track/3hEfpBHxgieRLz4t3kLNEg`;
+        return m.reply(txt);
     }
-  } else { 
-    m.reply(wait);
-    const text = args.join(" ");
+
+    // 2. Memberikan response feedback agar user tahu request diproses
+    await m.reply(global.wait || '⏳ _Sedang memproses..._');
+
     try {
-      const api = await fetch(`https://api.botcahx.eu.org/api/search/spotify?query=${text}&apikey=${btc}`);
-      let json = await api.json();
-      let res = json.result.data;
-      let teks = "";
-      for (let i in res) {
-        teks += `*${parseInt(i) + 1}.* *Title:* ${res[i].title}\n`;
-        teks += `*Duration:* ${res[i].duration}\n`;
-        teks += `*Popularity:* ${res[i].popularity}\n`;
-        teks += `*Link:* ${res[i].url}\n\n`;
-      }
-      await conn.relayMessage(m.chat, {
-        extendedTextMessage: {
-          text: teks,
-          contextInfo: {
-            externalAdReply: {
-              title: `🔍 Search : ${text}`,
-              mediaType: 1,
-              previewType: 0,
-              showAdAttribution: false,
-              renderLargerThumbnail: true,
-              thumbnailUrl: 'https://www.scdn.co/i/_global/open-graph-default.png',
-              sourceUrl: ''
+        // 3. Deteksi Input: Apakah berupa Link Download atau Query Pencarian?
+        const isUrl = text.match(/spotify\.com/i);
+
+        if (isUrl) {
+            // ==========================================
+            // MODE DOWNLOADER
+            // ==========================================
+            const res = await spotify.download(text);
+
+            if (!res.status) throw res.msg || `Gagal mengambil data dari Spotify.`;
+
+            // Ekstraksi Data dari module library
+            let { title, artist, album, cover, releaseDate } = res.metadata;
+            let audioUrl = res.download.mp3;
+
+            // Merakit Caption (Tetap mempertahankan UX dari spotify2.js)
+            let caption = `🎵 *S P O T I F Y - D L*\n\n`;
+            caption += `🎧 *Judul:* ${title}\n`;
+            caption += `🎤 *Artis:* ${artist}\n`;
+            caption += `💿 *Album:* ${album}\n`;
+            caption += `📅 *Rilis:* ${releaseDate}\n\n`;
+            caption += `_Tunggu sebentar, file audio sedang dikirim..._`;
+
+            // Kirim Cover Image dengan Caption
+            await conn.sendFile(m.chat, cover, 'cover.jpg', caption, m);
+
+            // Kirim File Audio (MP3)
+            await conn.sendMessage(m.chat, { 
+                audio: { url: audioUrl }, 
+                mimetype: 'audio/mpeg', 
+                fileName: `${title}.mp3`,
+                ptt: false // Set true jika ingin berbentuk Voice Note
+            }, { quoted: m });
+
+        } else {
+            // ==========================================
+            // MODE SEARCH
+            // ==========================================
+            const res = await spotify.search(text);
+            
+            if (!res.status) throw `❌ Lagu *${text}* tidak ditemukan di Spotify.`;
+
+            const tracks = res.data;
+            let txt = `🎧 *S P O T I F Y  S E A R C H*\n\n`;
+            let limit = Math.min(10, tracks.length); // Membatasi output max 10 agar tidak spammy
+            
+            // Looping dan format hasil (UX dari spotify.js)
+            for (let i = 0; i < limit; i++) {
+                let track = tracks[i];
+                let title = track.title || track.name || '-';
+                let artist = track.artist || track.artists || track.author || 'Unknown';
+                let duration = track.duration || track.timestamp || '-';
+                let url = track.url || track.link || '-';
+
+                txt += `*${i + 1}. ${title}*\n`;
+                txt += `🎤 *Artis:* ${artist}\n`;
+                if (duration !== '-') txt += `⏱️ *Durasi:* ${duration}\n`;
+                txt += `🔗 *Link:* ${url}\n\n`;
             }
-          },
-          mentions: [m.sender]
-        }
-      }, {});
-    } catch (e) {
-      throw `🚩 ${eror}`;
-    }
-  }
-};
 
-handler.help = ['spotify'];
-handler.command = /^(spotify)$/i;
+            txt += `> _Gunakan perintah *${usedPrefix}${command} <link>* untuk mengunduh lagu di atas._`;
+
+            // Ambil thumbnail dari hasil pertama jika tersedia
+            let thumb = tracks[0].image || tracks[0].thumbnail || tracks[0].cover || null;
+
+            if (thumb) {
+                await conn.sendFile(m.chat, thumb, 'spotify.jpg', txt.trim(), m);
+            } else {
+                await m.reply(txt.trim());
+            }
+        }
+
+    } catch (e) {
+        console.error('[Plugin Spotify Error]', e);
+        // Fallback error menggunakan format error global
+        m.reply(typeof e === 'string' ? e : (global.eror || '❌ Terjadi kesalahan pada server kami.'));
+    }
+}
+
+// Metadata Plugin standar Baileys Bot
+handler.help = ['spotify'].map(v => v + ' <judul lagu/link>');
 handler.tags = ['downloader'];
-handler.limit = true;
+handler.command = /^(spotify(dl|search)?)$/i; // Fleksibel menerima .spotify, .spotifydl, .spotifysearch
+
+// Flag Keamanan & Batasan Penggunaan
+handler.limit = true; // Mengurangi limit bot pengguna
+handler.group = false; // Boleh digunakan di PC maupun Grup
+
 module.exports = handler;

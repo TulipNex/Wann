@@ -104,10 +104,10 @@ handler.before = function (m, { conn, match }) {
     let tag = `@${m.sender.replace(/@.+/, '')}` 
     let mentionedJid = [m.sender] 
 
-    let teks = `❌ *Perintah Tidak Ditemukan!*\n\nMaaf Kak ${tag}, menu *${usedPrefix + commandOnly}* tidak tersedia di dalam sistem.`
+    let teks = `⛔ *Perintah Tidak Ditemukan!*\n\nMaaf Kak ${tag}, menu *${usedPrefix + commandOnly}* tidak tersedia di dalam sistem.`
 
     if (mean && som >= 60) {
-        teks += `\n\n*Apakah yang Anda maksud:*\n> ◦ \`${usedPrefix + mean}\`\n> ◦ Kemiripan: ${parseInt(som)}%`
+        teks += `\n\n*Apakah yang Anda maksud:*\n> ◦ ${usedPrefix + mean}\n> ◦ Kemiripan: ${parseInt(som)}%`
 
         // Tampilkan panduan eksekusi cepat HANYA kepada Owner & Premium
         let isROwner = [conn.user.jid, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender);

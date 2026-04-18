@@ -1,20 +1,29 @@
-const axios = require('axios');
+/**
+ * Nama Plugin: AI Tag Ultimate (Gemini Brain + User Capabilities)
+ * Deskripsi: Bot merespon saat di-tag di grup, membaca profil, jadwal, persona, & memiliki memori.
+ * Author: Senior WhatsApp Bot Developer
+ */
+
+const fetch = require('node-fetch'); // Sesuai requirement scraping/networking
 const fs = require('fs');
 const path = require('path');
 
 let handler = async (m, { conn, text, command }) => {
-// kosong
+    // Kosong: Plugin ini berjalan di background (handler.before)
 };
 
 handler.before = async (m, { conn }) => {
     try {
         if (!m.isGroup) return; // Hanya aktif di grup
         
+        // Inisialisasi Database Sesi & Anti-Spam
         conn.selfai = conn.selfai || {};
-        conn.aiLock = conn.aiLock || {}; // 🛡️ Gembok Anti-Spam (Baru)
+        conn.aiLock = conn.aiLock || {}; 
 
+        // Hindari merespon pesan dari bot itu sendiri
         if (m.isBaileys && m.fromMe) return;
 
+        // Cek apakah pesan menge-tag/mention bot
         if (m.mentionedJid && m.mentionedJid.length > 0) {
             const botNumber = conn.user.jid.split('@')[0];
             
@@ -23,41 +32,21 @@ handler.before = async (m, { conn }) => {
             );
             
             if (isMention) {
+                // Hapus nomor bot dari teks input
                 const filter = m.text.replace(/@\d+/g, '').trim();
                 
-                // 1. FITUR RESET
+                // ==========================================
+                // FITUR 1: RESET MEMORI (/reset)
+                // ==========================================
                 if (filter.toLowerCase() === '/reset') {
                     delete conn.selfai[m.sender];
-                    await m.reply('✅ Session chat AI untukmu di grup ini berhasil direset.');
-                    return true;
-                }
-                
-                // 2. FITUR PEMBUAT GAMBAR (/imagine)
-                if (filter.toLowerCase().startsWith('/imagine')) {
-                    const imagePrompt = filter.replace('/imagine', '').trim();
-                    if (!imagePrompt) {
-                        await m.reply('Silakan berikan deskripsi gambar yang ingin dibuat.\n*Contoh:* @Wann /imagine kucing terbang');
-                        return true;
-                    }
-
-                    try {
-                        await conn.sendPresenceUpdate('composing', m.chat);
-                        const response = await axios.get(`https://api.botcahx.eu.org/api/search/openai-image?apikey=${global.btc}&text=${encodeURIComponent(imagePrompt)}`, {
-                            responseType: 'arraybuffer'
-                        });
-                        
-                        const image = response.data;
-                        await conn.sendFile(m.chat, image, 'aiimg.jpg', `🎨 *Hasil Gambar:* ${imagePrompt}`, m);
-                    } catch (error) {
-                        console.error(error);
-                        await m.reply('❌ Terjadi kesalahan saat membuat gambar. Mohon coba lagi.');
-                    }
+                    await m.reply('✅ Memori percakapan AI untukmu di grup ini berhasil dihapus/reset.');
                     return true;
                 }
 
-                await conn.sendPresenceUpdate('composing', m.chat);
-                
-                // 3. FITUR SAPAAN KOSONG
+                // ==========================================
+                // FITUR 2: SAPAAN KOSONG
+                // ==========================================
                 if (!filter) {
                     const empty_response = [
                         `Ada yang bisa saya bantu, ${m.name}?`,
@@ -67,34 +56,33 @@ handler.before = async (m, { conn }) => {
                     ];
                     
                     const _response_pattern = empty_response[Math.floor(Math.random() * empty_response.length)];
+                    await conn.sendMessage(m.chat, { react: { text: '👋', key: m.key } });
                     await m.reply(_response_pattern);
                     return true;
                 }
 
-                // Jangan respon jika pesan diawali prefix bot
-                if ([".", "#", "!", "/", "\\"].some(prefix => filter.startsWith(prefix))) return;
+                // Jangan respon jika pesan diawali prefix bot (agar tidak bentrok dengan command lain)
+                if (/^[.#!/\\]/.test(filter)) return;
 
                 // 🛡️ AKTIFKAN GEMBOK ANTI-SPAM
                 if (conn.aiLock[m.sender]) return true; 
                 conn.aiLock[m.sender] = true;
 
                 try {
-                    if (!conn.selfai[m.sender]) {
-                        conn.selfai[m.sender] = { sessionChat: [] };
-                    }
-                    
-                    const previousMessages = conn.selfai[m.sender].sessionChat || [];
+                    await conn.sendMessage(m.chat, { react: { text: '⏳', key: m.key } });
+                    await conn.sendPresenceUpdate('composing', m.chat);
 
                     // ==========================================
-                    // 🧠 UPGRADE 1: MENGAMBIL DATABASE USER 
+                    // 🧠 CORE 1: PENGAMBILAN DATA USER & JADWAL
                     // ==========================================
                     let userDb = global.db.data.users[m.sender] || {};
                     
-                    // A. Data Waktu & Pengingat
+                    // A. Waktu Realtime (WITA)
                     let nowMs = Date.now();
                     let tzOpt = { timeZone: "Asia/Makassar", dateStyle: "full", timeStyle: "short" };
                     let waktuSekarang = new Date(nowMs).toLocaleString("id-ID", tzOpt);
 
+                    // B. Data Pengingat/Jadwal
                     let pengingat = userDb.pengingat || [];
                     let teksPengingat = "Saat ini User TIDAK memiliki jadwal pengingat.";
 
@@ -107,77 +95,87 @@ handler.before = async (m, { conn }) => {
                         });
                     }
 
-                    // B. Data Profil (Nama & Umur)
+                    // C. Profil User
                     let infoProfil = "";
                     if (userDb.registered) {
-                        infoProfil = `Nama Panggilan: ${userDb.name}\nUmur: ${userDb.age} tahun.`;
+                        infoProfil = `Nama: ${userDb.name}\nUmur: ${userDb.age} tahun.`;
                     } else {
-                        infoProfil = `User ini belum mendaftar di database bot. Kamu belum mengetahui nama dan umurnya.`;
+                        infoProfil = `User ini belum mendaftar di database bot. Arahkan user untuk daftar menggunakan perintah .daftar nama.umur (misal: .daftar Budi.18)`;
                     }
 
                     // ==========================================
-                    // 🧠 UPGRADE 2: MEMBACA PERSONA DARI FILE .TXT
+                    // 🧠 CORE 2: INJEKSI PERSONA & SYSTEM PROMPT
                     // ==========================================
                     let filePersona = path.join(process.cwd(), 'persona.txt');
-                    let systemPrompt = "";
+                    let systemPrompt = "Kamu adalah Wann, AI cerdas yang ramah."; // Fallback
 
                     try {
                         let teksMentah = fs.readFileSync(filePersona, 'utf-8');
                         systemPrompt = teksMentah
                             .split('{WAKTU_SEKARANG}').join(waktuSekarang)
-                            .split('{TEKS_PENGINGAT}').join(teksPengingat);
-                        
-                        systemPrompt += `\n\n[INFORMASI PROFIL USER YANG MENGOBROL DENGANMU SAAT INI]:\n${infoProfil}`;
-                        
-                        // Konteks Grup: Beri tahu AI bahwa ia sedang berada di dalam grup
-                        systemPrompt += `\n\n[INFO LOKASI CHAT]: Saat ini kamu sedang mengobrol di dalam sebuah Grup WhatsApp, bukan di private chat. Berbaurlah dengan santai.`;
+                            .split('{TEKS_PENGINGAT}').join(teksPengingat)
+                            .split('{INFO_PROFIL}').join(infoProfil);
                     } catch (err) {
-                        systemPrompt = `Kamu Wann. Waktu: ${waktuSekarang} WITA. ${teksPengingat}\n\n[INFO PROFIL USER]:\n${infoProfil}`;
+                        // Fallback jika file persona.txt tidak ditemukan
+                        systemPrompt = `Kamu adalah Wann. Waktu saat ini: ${waktuSekarang} WITA. ${teksPengingat}\n\n[INFO PROFIL USER]:\n${infoProfil}\n\nSaat ini kamu berada di Grup WhatsApp.`;
                     }
 
                     // ==========================================
-                    // 🧠 UPGRADE 3: TRIK BISIKAN WAKTU
+                    // 🧠 CORE 3: MANAJEMEN MEMORI (CONVERSATIONAL)
                     // ==========================================
-                    let pesanUserPlusInjeksi = `[Info Rahasia: Saat ini adalah ${waktuSekarang} WITA]\n\n${filter}`;
-
-                    const messages = [
-                        { role: "system", content: systemPrompt },
-                        { role: "assistant", content: `Saya Wann! Ada yang bisa saya bantu hari ini?` },
-                        ...previousMessages.map((msg, i) => ({ role: i % 2 === 0 ? 'user' : 'assistant', content: msg })),
-                        { role: "user", content: pesanUserPlusInjeksi }
-                    ];
+                    if (!conn.selfai[m.sender]) {
+                        conn.selfai[m.sender] = { sessionChat: [] };
+                    }
+                    let memoryArray = conn.selfai[m.sender].sessionChat;
                     
-                    const chat = async function(message) {
-                        return new Promise(async (resolve, reject) => {
-                            try {
-                                const params = {
-                                    message: message,
-                                    apikey: global.btc // Memastikan apikey ditarik dari global
-                                };
-                                const { data } = await axios.post('https://api.botcahx.eu.org/api/search/openai-custom', params);
-                                resolve(data);
-                            } catch (error) {
-                                reject(error);
-                            }
-                        });
-                    };
+                    // Merangkai ingatan sebelumnya menjadi string
+                    let memoryStr = memoryArray.map(v => `${v.role === 'user' ? 'User' : 'Wann'}: ${v.text}`).join('\n');
                     
-                    let res = await chat(messages);
-                    if (res && res.result) {
-                        await m.reply(res.result);
-                        
-                        // Simpan teks 'filter' (tanpa tag info rahasia) ke dalam riwayat
-                        conn.selfai[m.sender].sessionChat = [
-                            ...conn.selfai[m.sender].sessionChat,
-                            filter,
-                            res.result
-                        ];
+                    // Bangun Payload Akhir
+                    let fullPrompt = filter;
+                    if (memoryStr.length > 0) {
+                        fullPrompt = `[Riwayat Percakapan Sebelumnya]\n${memoryStr}\n\n[Pertanyaan Saat Ini]\nUser: ${filter}`;
                     } else {
-                        m.reply("⚠️ Maaf, Wann sedang kesulitan mengambil data. Silakan balas pesan ini dengan /reset untuk memulai ulang sesi.");
+                        // Trik Injeksi Waktu untuk chat pertama
+                        fullPrompt = `[Info Waktu: ${waktuSekarang} WITA]\nUser: ${filter}`;
                     }
+
+                    // ==========================================
+                    // 🧠 CORE 4: HIT API GEMINI (AI-VEBRIY BRAIN)
+                    // ==========================================
+                    let apiUrl = `https://api.shinzu.web.id/api/ai-chat/gemini?prompt=${encodeURIComponent(fullPrompt)}&system=${encodeURIComponent(systemPrompt)}`;
+                    
+                    let response = await fetch(apiUrl);
+                    let result = await response.json();
+
+                    if (!result.status || !result.data || !result.data.response) {
+                        throw new Error('Invalid API Response from Gemini Endpoint');
+                    }
+
+                    let aiReply = result.data.response;
+
+                    // Filter Markdown agar sesuai dengan native WhatsApp Bold
+                    aiReply = aiReply.replace(/\*\*/g, '*');
+
+                    // ==========================================
+                    // 🧠 CORE 5: SIMPAN MEMORI & RESPONSE
+                    // ==========================================
+                    memoryArray.push({ role: 'user', text: filter });
+                    memoryArray.push({ role: 'bot', text: aiReply });
+
+                    // Batasi memori maksimal 10 interaksi terakhir (5 pasang) agar payload tidak membengkak
+                    if (memoryArray.length > 10) {
+                        conn.selfai[m.sender].sessionChat = memoryArray.slice(memoryArray.length - 10);
+                    }
+
+                    // Kirim Balasan
+                    await m.reply(aiReply);
+                    await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } });
+
                 } catch (e) {
-                    console.error(e);
-                    m.reply("❌ Terjadi kesalahan dalam memproses permintaan AI.");
+                    console.error('AI Tag Error:', e);
+                    await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } });
+                    m.reply("⚠️ Maaf, Wann sedang kesulitan memproses data. Silakan balas pesan ini dengan /reset untuk memulai ulang sesi.");
                 } finally {
                     // 🔓 BUKA GEMBOK ANTI-SPAM
                     delete conn.aiLock[m.sender];
@@ -187,7 +185,7 @@ handler.before = async (m, { conn }) => {
         }
         return true;
     } catch (error) {
-        console.error(error);
+        console.error('Fatal Handler Error:', error);
         return true;
     }
 };

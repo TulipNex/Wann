@@ -1,39 +1,71 @@
+/**
+ * THREADS DOWNLOADER PLUGIN
+ * Fitur: Mengunduh video/foto dari Threads menggunakan API NexRay
+ */
+
 const fetch = require('node-fetch');
+
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-  if (!args[0]) {
-    throw `Masukkan URL!\n\ncontoh:\n${usedPrefix + command} https://www.threads.net/@cindyyuvia/post/C_Nqx3khgkI/?xmt=AQGzpsCvidh8IwIqOvq4Ov05Zd5raANiVdvCujM_pjBa1Q`;
-  }
-  if (!args[0].match(/threads/gi)) {
-    throw `URL Tidak Ditemukan!`;
-  }
-  m.reply(wait);
-  try {
-    const api = await fetch(`https://api.botcahx.eu.org/api/download/threads?url=${args[0]}&apikey=${btc}`).then(results => results.json());
-    const foto = api.result.image_urls[0] || null;
-    const video = api.result.video_urls[0] || null;   
-    if (video) {
-      try { 
-        conn.sendFile(m.chat, video.download_url, 'threads.mp4', '*THREADS DOWNLOADER*', m);
-      } catch (e) {
-        throw `Media video tidak ditemukan!`;
-      }
-    } else if (foto) {
-      try {
-        conn.sendFile(m.chat, foto, 'threads.jpeg', '*THREADS DOWNLOADER*', m);
-      } catch (e) {
-        throw `Media foto tidak ditemukan!`;
-      }
-    } else {
-      throw `Konten tidak ditemukan!`;
+    // Validasi input URL
+    if (!args[0]) {
+        return m.reply(`*Format salah!*\n\nContoh: \n${usedPrefix}${command} https://www.threads.net/@user/post/xxx`);
     }
-  } catch (e) {
-    throw eror
-  }
+
+    // Cek apakah URL valid Threads
+    if (!args[0].match(/threads\.(com|net)/gi)) {
+        return m.reply('⚠️ URL yang Anda berikan bukan dari Threads!');
+    }
+
+    // Tampilkan pesan loading
+    await m.reply(global.wait || '⏳ Sedang memproses permintaan Anda...');
+
+    try {
+        // Fetch data dari API NexRay
+        const apiUrl = `https://api.nexray.web.id/downloader/threads?url=${encodeURIComponent(args[0])}`;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        // Cek status keberhasilan API
+        if (!data.status || !data.result) {
+            throw 'Gagal mendapatkan data dari server.';
+        }
+
+        const { title, media, author: profile } = data.result;
+
+        // Siapkan caption informasi pengunggah
+        let caption = `🎬 *THREADS DOWNLOADER*`;
+        
+        // Kirim media (mendukung multi-media)
+        if (media && media.length > 0) {
+            for (let i = 0; i < media.length; i++) {
+                const item = media[i];
+                // Kirim media pertama dengan caption, sisanya tanpa caption
+                const finalCaption = i === 0 ? caption : '';
+                
+                await conn.sendFile(
+                    m.chat, 
+                    item.url, 
+                    '', 
+                    finalCaption, 
+                    m
+                );
+
+                // Jeda singkat antar pengiriman jika multi-media untuk menghindari spam
+                if (media.length > 1) await new Promise(resolve => setTimeout(resolve, 1500));
+            }
+        } else {
+            m.reply('❌ Tidak ada media yang ditemukan pada postingan tersebut.');
+        }
+
+    } catch (e) {
+        console.error('Threads Downloader Error:', e);
+        m.reply(global.eror || `❌ Terjadi kesalahan saat mengunduh: ${e.message || e}`);
+    }
 };
-handler.command = handler.help = ['threads', 'threadsdl'];
+
+handler.help = ['threads'].map(v => v + ' <url>');
 handler.tags = ['downloader'];
-handler.limit = true;
-handler.group = false;
-handler.premium = false;
+handler.command = /^(threads)$/i;
+handler.limit = true; // Menggunakan limit agar tidak disalahgunakan
 
 module.exports = handler;
